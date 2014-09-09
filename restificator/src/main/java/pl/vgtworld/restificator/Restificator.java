@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator;
 
+import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,6 +10,14 @@ public class Restificator {
 	
 	public static void main(String[] args) {
 		LOGGER.debug("Start application");
+		
+		try {
+			CmdParser cmdParser = new CmdParser();
+			cmdParser.parse(args);
+			cmdParser.displayHelp();
+		} catch (ParseException e) {
+			LOGGER.error("Unexpected exception while parsing command line arguments. message: {}", e.getMessage());
+		}
 	}
 	
 }
