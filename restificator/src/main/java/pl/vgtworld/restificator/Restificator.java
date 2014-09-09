@@ -14,7 +14,9 @@ public class Restificator {
 		try {
 			CmdParser cmdParser = new CmdParser();
 			cmdParser.parse(args);
-			cmdParser.displayHelp();
+			if (!cmdParser.isValid()) {
+				System.out.println(cmdParser.getValidationErrorMessage());
+			}
 		} catch (ParseException e) {
 			LOGGER.error("Unexpected exception while parsing command line arguments. message: {}", e.getMessage());
 		}
