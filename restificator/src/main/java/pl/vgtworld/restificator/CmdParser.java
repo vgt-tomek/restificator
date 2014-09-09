@@ -18,21 +18,21 @@ class CmdParser {
 	
 	private CommandLine cmd;
 	
-	public CmdParser() {
+	CmdParser() {
 		initializeParser();
 	}
 	
-	public void parse(String[] args) throws ParseException {
+	void parse(String[] args) throws ParseException {
 		CommandLineParser parser = new BasicParser();
 		LOGGER.debug("Parsing arguments: {}", (Object)args);
 		cmd = parser.parse(options, args);
 	}
 	
-	public boolean hasOption(String option) {
+	boolean hasOption(String option) {
 		return cmd.hasOption(option);
 	}
 	
-	public void displayHelp() {
+	void displayHelp() {
 		HelpFormatter help = new HelpFormatter();
 		help.printHelp("java -jar restificator.jar [parameters]", options);
 	}
