@@ -24,8 +24,6 @@ class CmdParser {
 	
 	private CommandLine cmd;
 	
-	private String validationErrorMessage;
-	
 	CmdParser() {
 		initializeParser();
 	}
@@ -34,19 +32,10 @@ class CmdParser {
 		CommandLineParser parser = new BasicParser();
 		LOGGER.debug("Parsing arguments: {}", (Object)args);
 		cmd = parser.parse(options, args);
-		validate();
 	}
 	
 	boolean hasOption(String option) {
 		return cmd.hasOption(option);
-	}
-	
-	boolean isValid() {
-		return validationErrorMessage == null;
-	}
-	
-	String getValidationErrorMessage() {
-		return validationErrorMessage;
 	}
 	
 	void displayHelp() {
@@ -54,25 +43,18 @@ class CmdParser {
 		help.printHelp("java -jar restificator.jar [parameters]", options);
 	}
 	
-	private void validate() {
-		validationErrorMessage = null;
-		if (!hasOption(ACTION_OPTION)) {
-			validationErrorMessage = "Action parameter is missing. See --help for more info.";
-			return;
-		}
-		if (!hasOption(FILE_OPTION)) {
-			validationErrorMessage = "File parameter is missing. See --help for more info.";
-			return;
-		}
-	}
-	
 	private void initializeParser() {
-		Option executeOption = new Option(null, FILE_OPTION, true, "Path to script file");
-		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file [create|edit|execute]");
-		Option helpOption = new Option(null, HELP_OPTION, true, "Help screen");
 		options = new Options();
-		options.addOption(executeOption);
+		
+		Option fileOption = new Option(null, FILE_OPTION, true, "Path to script file");
+		fileOption.setRequired(true);
+		options.addOption(fileOption);
+		
+		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file [create|edit|execute]");
+		actionOption.setRequired(true);
 		options.addOption(actionOption);
+		
+		Option helpOption = new Option(null, HELP_OPTION, true, "Help screen");
 		options.addOption(helpOption);
 	}
 	
