@@ -15,14 +15,18 @@ import org.slf4j.LoggerFactory;
 
 class CmdParser {
 	
+	public enum Action {
+		CREATE, EDIT, EXECUTE
+	};
+	
 	private static final String FILE_OPTION = "file";
-
+	
 	private static final String ACTION_OPTION = "action";
 	
 	private static final String HELP_OPTION = "help";
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CmdParser.class);
-
+	
 	private Options options;
 	
 	private CommandLine cmd;
@@ -36,7 +40,7 @@ class CmdParser {
 	
 	void parse(String[] args) throws ParseException {
 		CommandLineParser parser = new BasicParser();
-		LOGGER.debug("Parsing arguments: {}", (Object)args);
+		LOGGER.debug("Parsing arguments: {}", (Object) args);
 		cmd = parser.parse(options, args);
 		if (!actionAllowedValues.contains(cmd.getOptionValue(ACTION_OPTION))) {
 			throw new ParseException("Unknown action. See --help for more information.");
@@ -59,7 +63,8 @@ class CmdParser {
 		fileOption.setRequired(true);
 		options.addOption(fileOption);
 		
-		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file " + actionAllowedValues.toString());
+		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file "
+				+ actionAllowedValues.toString());
 		actionOption.setRequired(true);
 		options.addOption(actionOption);
 		
@@ -69,8 +74,8 @@ class CmdParser {
 	
 	private void initializeAllowedValues() {
 		actionAllowedValues = new ArrayList<>();
-		actionAllowedValues.add("create");
-		actionAllowedValues.add("edit");
-		actionAllowedValues.add("execute");
+		for (Action action : Action.values()) {
+			actionAllowedValues.add(action.toString().toLowerCase());
+		}
 	}
 }
