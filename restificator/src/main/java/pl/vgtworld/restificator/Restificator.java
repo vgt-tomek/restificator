@@ -8,6 +8,8 @@ public class Restificator {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(Restificator.class);
 	
+	private static final Logger OUTPUT = LoggerFactory.getLogger("output");
+	
 	public static void main(String[] args) {
 		LOGGER.debug("Start application");
 		
@@ -19,7 +21,7 @@ public class Restificator {
 			}
 			cmdParser.parse(args);
 		} catch (ParseException e) {
-			System.out.println(e.getMessage());
+			OUTPUT.info(e.getMessage());
 		}
 	}
 	
