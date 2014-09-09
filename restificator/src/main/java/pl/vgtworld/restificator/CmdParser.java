@@ -54,7 +54,7 @@ class CmdParser {
 		actionOption.setRequired(true);
 		options.addOption(actionOption);
 		
-		Option helpOption = new Option(null, HELP_OPTION, true, "Help screen");
+		Option helpOption = new Option(null, HELP_OPTION, false, "Help screen");
 		options.addOption(helpOption);
 	}
 	

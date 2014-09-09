@@ -13,9 +13,13 @@ public class Restificator {
 		
 		try {
 			CmdParser cmdParser = new CmdParser();
+			if (args.length >= 1 && args[0].equals("--help")) {
+				cmdParser.displayHelp();
+				return;
+			}
 			cmdParser.parse(args);
 		} catch (ParseException e) {
-			LOGGER.error("Unexpected exception while parsing command line arguments. message: {}", e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	}
 	
