@@ -1,5 +1,8 @@
 package pl.vgtworld.restificator;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -15,7 +18,7 @@ class CmdParser {
 	private static final String FILE_OPTION = "file";
 
 	private static final String ACTION_OPTION = "action";
-
+	
 	private static final String HELP_OPTION = "help";
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CmdParser.class);
@@ -24,7 +27,10 @@ class CmdParser {
 	
 	private CommandLine cmd;
 	
+	private List<String> actionAllowedValues;
+	
 	CmdParser() {
+		initializeAllowedValues();
 		initializeParser();
 	}
 	
@@ -32,6 +38,9 @@ class CmdParser {
 		CommandLineParser parser = new BasicParser();
 		LOGGER.debug("Parsing arguments: {}", (Object)args);
 		cmd = parser.parse(options, args);
+		if (!actionAllowedValues.contains(cmd.getOptionValue(ACTION_OPTION))) {
+			throw new ParseException("Unknown action. See --help for more information.");
+		}
 	}
 	
 	boolean hasOption(String option) {
@@ -50,7 +59,7 @@ class CmdParser {
 		fileOption.setRequired(true);
 		options.addOption(fileOption);
 		
-		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file [create|edit|execute]");
+		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file " + actionAllowedValues.toString());
 		actionOption.setRequired(true);
 		options.addOption(actionOption);
 		
@@ -58,4 +67,10 @@ class CmdParser {
 		options.addOption(helpOption);
 	}
 	
+	private void initializeAllowedValues() {
+		actionAllowedValues = new ArrayList<>();
+		actionAllowedValues.add("create");
+		actionAllowedValues.add("edit");
+		actionAllowedValues.add("execute");
+	}
 }
