@@ -20,6 +20,20 @@ public class Restificator {
 				return;
 			}
 			cmdParser.parse(args);
+			switch (cmdParser.getAction()) {
+			case CREATE:
+				LOGGER.debug("Create new script");
+				OUTPUT.info("Creating new script is not supported in this version.");
+				break;
+			case EDIT:
+				LOGGER.debug("Edit existing script");
+				OUTPUT.info("Editing script is not supported in this version.");
+				break;
+			case EXECUTE:
+				LOGGER.debug("Execute script");
+				//TODO
+				break;
+			}
 		} catch (ParseException e) {
 			OUTPUT.info(e.getMessage());
 		}

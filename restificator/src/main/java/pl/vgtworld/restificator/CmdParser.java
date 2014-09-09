@@ -47,6 +47,10 @@ class CmdParser {
 		}
 	}
 	
+	Action getAction() {
+		return Action.valueOf(cmd.getOptionValue(ACTION_OPTION).toUpperCase());
+	}
+	
 	boolean hasOption(String option) {
 		return cmd.hasOption(option);
 	}
