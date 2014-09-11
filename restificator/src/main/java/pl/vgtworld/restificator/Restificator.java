@@ -15,10 +15,6 @@ public class Restificator {
 		
 		try {
 			CmdParser cmdParser = new CmdParser();
-			if (args.length >= 1 && args[0].equals("--help")) {
-				cmdParser.displayHelp();
-				return;
-			}
 			cmdParser.parse(args);
 			switch (cmdParser.getAction()) {
 			case CREATE:
@@ -32,6 +28,9 @@ public class Restificator {
 			case EXECUTE:
 				LOGGER.debug("Execute script");
 				//TODO
+				break;
+			case HELP:
+				cmdParser.displayHelp();
 				break;
 			}
 		} catch (ParseException e) {

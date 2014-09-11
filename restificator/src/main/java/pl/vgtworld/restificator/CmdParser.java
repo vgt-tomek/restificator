@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 class CmdParser {
 	
 	public enum Action {
-		CREATE, EDIT, EXECUTE
+		CREATE, EDIT, EXECUTE, HELP
 	};
 	
 	private static final String FILE_OPTION = "file";
@@ -27,28 +27,39 @@ class CmdParser {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CmdParser.class);
 	
-	private Options options;
+	private Options coreOptions;
+	
+	private Options additionalOptions;
 	
 	private CommandLine cmd;
 	
 	private List<String> actionAllowedValues;
 	
+	private Action activeAction;
+	
 	CmdParser() {
 		initializeAllowedValues();
-		initializeParser();
+		initializeCoreOptions();
+		initializeAdditionalOptions();
 	}
 	
 	void parse(String[] args) throws ParseException {
 		CommandLineParser parser = new BasicParser();
 		LOGGER.debug("Parsing arguments: {}", (Object) args);
-		cmd = parser.parse(options, args);
+		cmd = parser.parse(additionalOptions, args);
+		if (cmd.hasOption(HELP_OPTION)) {
+			activeAction = Action.HELP;
+			return;
+		}
+		cmd = parser.parse(coreOptions, args);
 		if (!actionAllowedValues.contains(cmd.getOptionValue(ACTION_OPTION))) {
 			throw new ParseException("Unknown action. See --help for more information.");
 		}
+		activeAction = Action.valueOf(cmd.getOptionValue(ACTION_OPTION).toUpperCase());
 	}
 	
 	Action getAction() {
-		return Action.valueOf(cmd.getOptionValue(ACTION_OPTION).toUpperCase());
+		return activeAction;
 	}
 	
 	boolean hasOption(String option) {
@@ -57,23 +68,37 @@ class CmdParser {
 	
 	void displayHelp() {
 		HelpFormatter help = new HelpFormatter();
-		help.printHelp("java -jar restificator.jar [parameters]", options);
+		help.printHelp("java -jar restificator.jar [parameters]", coreOptions);
 	}
 	
-	private void initializeParser() {
-		options = new Options();
+	private void initializeCoreOptions() {
+		coreOptions = initializeOptions(true);
+	}
+	
+	private void initializeAdditionalOptions() {
+		additionalOptions = initializeOptions(false);
+	}
+	
+	private Options initializeOptions(boolean restrictRequired) {
+		Options options = new Options();
 		
 		Option fileOption = new Option(null, FILE_OPTION, true, "Path to script file");
-		fileOption.setRequired(true);
+		if (restrictRequired) {
+			fileOption.setRequired(true);
+		}
 		options.addOption(fileOption);
 		
 		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file "
 				+ actionAllowedValues.toString());
-		actionOption.setRequired(true);
+		if (restrictRequired) {
+			actionOption.setRequired(true);
+		}
 		options.addOption(actionOption);
 		
 		Option helpOption = new Option(null, HELP_OPTION, false, "Help screen");
 		options.addOption(helpOption);
+		
+		return options;
 	}
 	
 	private void initializeAllowedValues() {
