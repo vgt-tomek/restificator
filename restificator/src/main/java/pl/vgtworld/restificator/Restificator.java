@@ -4,6 +4,10 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pl.vgtworld.restificator.data.RestificatorExecutionData;
+import pl.vgtworld.restificator.loader.LoadException;
+import pl.vgtworld.restificator.loader.ScriptLoader;
+
 public class Restificator {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(Restificator.class);
@@ -27,15 +31,20 @@ public class Restificator {
 				break;
 			case EXECUTE:
 				LOGGER.debug("Execute script");
+				RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
 				//TODO
 				break;
 			case HELP:
 				cmdParser.displayHelp();
 				break;
 			}
-		} catch (ParseException e) {
+		} catch (ParseException | LoadException e) {
 			OUTPUT.info(e.getMessage());
 		}
 	}
 	
+	private static RestificatorExecutionData loadScript(String path) throws LoadException {
+		ScriptLoader loader = new ScriptLoader();
+		return loader.load(path);
+	}
 }

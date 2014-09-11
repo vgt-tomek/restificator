@@ -66,6 +66,10 @@ class CmdParser {
 		return cmd.hasOption(option);
 	}
 	
+	String getFilePath() {
+		return cmd.getOptionValue(FILE_OPTION);
+	}
+	
 	void displayHelp() {
 		HelpFormatter help = new HelpFormatter();
 		help.printHelp("java -jar restificator.jar [parameters]", coreOptions);
