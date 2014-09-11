@@ -32,6 +32,7 @@ public class Restificator {
 			case EXECUTE:
 				LOGGER.debug("Execute script");
 				RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
+				OUTPUT.info("" + scriptData);
 				//TODO
 				break;
 			case HELP:
