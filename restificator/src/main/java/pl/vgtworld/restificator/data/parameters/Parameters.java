@@ -13,13 +13,15 @@ public class Parameters {
 	
 	@XmlElementWrapper(name = "interactive")
 	@XmlElements({
-			@XmlElement(name = "text", type = Text.class)
+			@XmlElement(name = "text", type = Text.class),
+			@XmlElement(name = "counter", type = Counter.class)
 	})
 	private List<Parameter> interactiveParameters;
 	
 	@XmlElementWrapper(name = "predefined")
 	@XmlElements({
-			@XmlElement(name = "text", type = Text.class)
+			@XmlElement(name = "text", type = Text.class),
+			@XmlElement(name = "counter", type = Counter.class)
 	})
 	private List<Parameter> predefinedParameters;
 	
