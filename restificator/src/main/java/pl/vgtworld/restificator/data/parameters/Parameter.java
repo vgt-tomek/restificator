@@ -22,6 +22,6 @@ public abstract class Parameter {
 		this.description = description;
 	}
 	
-	public abstract String getValue();
+	public abstract String getParameterValue();
 	
 }
