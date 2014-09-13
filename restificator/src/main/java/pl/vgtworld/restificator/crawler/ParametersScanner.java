@@ -15,7 +15,7 @@ class ParametersScanner {
 	
 	private static final Logger OUTPUT = LoggerFactory.getLogger(Restificator.OUTPUT_LOGGER_NAME);
 	
-	public List<Parameter> readParameters(List<Parameter> parameters) {
+	List<Parameter> readParameters(List<Parameter> parameters) {
 		Scanner scanner = new Scanner(System.in);
 		List<Parameter> finalParameters = new ArrayList<>();
 		for (Parameter parameter : parameters) {
