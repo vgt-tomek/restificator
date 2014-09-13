@@ -4,6 +4,7 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pl.vgtworld.restificator.crawler.RestCrawler;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.loader.LoadException;
 import pl.vgtworld.restificator.loader.ScriptLoader;
@@ -34,8 +35,9 @@ public class Restificator {
 			case EXECUTE:
 				LOGGER.debug("Execute script");
 				RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
+				RestCrawler crawler = new RestCrawler();
+				crawler.executeScript(scriptData);
 				OUTPUT.info("" + scriptData);
-				//TODO
 				break;
 			case HELP:
 				cmdParser.displayHelp();

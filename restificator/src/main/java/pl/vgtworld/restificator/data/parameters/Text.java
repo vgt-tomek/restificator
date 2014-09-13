@@ -4,6 +4,14 @@ public class Text extends Parameter {
 	
 	private String value;
 	
+	public Text() {
+	}
+	
+	public Text(String name, String value) {
+		setName(name);
+		setValue(value);
+	}
+	
 	@Override
 	public String getParameterValue() {
 		return value;
