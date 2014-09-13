@@ -10,9 +10,11 @@ import pl.vgtworld.restificator.loader.ScriptLoader;
 
 public class Restificator {
 	
+	public static final String OUTPUT_LOGGER_NAME = "output";
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(Restificator.class);
 	
-	private static final Logger OUTPUT = LoggerFactory.getLogger("output");
+	private static final Logger OUTPUT = LoggerFactory.getLogger(OUTPUT_LOGGER_NAME);
 	
 	public static void main(String[] args) {
 		LOGGER.debug("Start application");
