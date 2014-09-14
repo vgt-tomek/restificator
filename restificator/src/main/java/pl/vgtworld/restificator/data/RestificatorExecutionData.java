@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import pl.vgtworld.restificator.data.executionqueue.Task;
+import pl.vgtworld.restificator.data.headers.Header;
 import pl.vgtworld.restificator.data.parameters.Parameters;
 import pl.vgtworld.restificator.data.requests.Request;
 import pl.vgtworld.restificator.data.settings.Settings;
@@ -23,7 +24,8 @@ public class RestificatorExecutionData {
 	private Settings settings;
 	
 	@XmlElementWrapper(name = "globalHeaders")
-	private Map<String, String> globalHeaders = new HashMap<>();
+	@XmlElement(name = "header")
+	private List<Header> globalHeaders = new ArrayList<>();
 	
 	private Parameters parameters = new Parameters();
 	
@@ -42,11 +44,11 @@ public class RestificatorExecutionData {
 		this.settings = settings;
 	}
 	
-	public Map<String, String> getGlobalHeaders() {
+	public List<Header> getGlobalHeaders() {
 		return globalHeaders;
 	}
 	
-	public void setGlobalHeaders(Map<String, String> globalHeaders) {
+	public void setGlobalHeaders(List<Header> globalHeaders) {
 		this.globalHeaders = globalHeaders;
 	}
 	

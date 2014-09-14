@@ -1,15 +1,25 @@
 package pl.vgtworld.restificator.data.requests;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+
+import pl.vgtworld.restificator.data.headers.Header;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Request {
 	
 	private RequestType type;
 	
 	private String path;
 	
-	private Map<String, String> headers = new HashMap<>();
+	@XmlElementWrapper(name = "headers")
+	@XmlElement(name = "header")
+	private List<Header> headers = new ArrayList<>();
 	
 	private String body;
 	
@@ -29,11 +39,11 @@ public class Request {
 		this.path = path;
 	}
 	
-	public Map<String, String> getHeaders() {
+	public List<Header> getHeaders() {
 		return headers;
 	}
 	
-	public void setHeaders(Map<String, String> headers) {
+	public void setHeaders(List<Header> headers) {
 		this.headers = headers;
 	}
 	
@@ -44,7 +54,7 @@ public class Request {
 	public void setBody(String body) {
 		this.body = body;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Request [type=" + type + ", path=" + path + ", headers=" + headers + ", body=" + body + "]";
