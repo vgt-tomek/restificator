@@ -14,10 +14,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import pl.vgtworld.restificator.data.executionqueue.Task;
 import pl.vgtworld.restificator.data.parameters.Parameters;
 import pl.vgtworld.restificator.data.requests.Request;
+import pl.vgtworld.restificator.data.settings.Settings;
 
 @XmlRootElement(name = "restificator")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RestificatorExecutionData {
+	
+	private Settings settings;
 	
 	@XmlElementWrapper(name = "globalHeaders")
 	private Map<String, String> globalHeaders = new HashMap<>();
@@ -30,6 +33,14 @@ public class RestificatorExecutionData {
 	
 	@XmlElementWrapper(name = "requests")
 	private Map<String, Request> requests = new HashMap<>();
+	
+	public Settings getSettings() {
+		return settings;
+	}
+	
+	public void setSettings(Settings settings) {
+		this.settings = settings;
+	}
 	
 	public Map<String, String> getGlobalHeaders() {
 		return globalHeaders;
@@ -65,8 +76,8 @@ public class RestificatorExecutionData {
 	
 	@Override
 	public String toString() {
-		return "RestificatorExecutionData [\nglobalHeaders=" + globalHeaders + ",\nparameters=" + parameters
-				+ ",\ntasks=" + tasks + ",\nrequests=" + requests + "\n]";
+		return "RestificatorExecutionData [\nsettings=" + settings + ",\nglobalHeaders=" + globalHeaders
+				+ ",\nparameters=" + parameters + ",\ntasks=" + tasks + ",\nrequests=" + requests + "\n]";
 	}
 	
 }
