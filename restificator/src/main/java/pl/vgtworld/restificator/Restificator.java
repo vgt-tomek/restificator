@@ -33,11 +33,11 @@ public class Restificator {
 				OUTPUT.info("Editing script is not supported in this version.");
 				break;
 			case EXECUTE:
-				LOGGER.debug("Execute script");
+				LOGGER.debug("Load script from " + cmdParser.getFilePath());
 				RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
 				RestCrawler crawler = new RestCrawler();
+				LOGGER.debug("Execute script: " + scriptData);
 				crawler.executeScript(scriptData);
-				OUTPUT.info("" + scriptData);
 				break;
 			case HELP:
 				cmdParser.displayHelp();

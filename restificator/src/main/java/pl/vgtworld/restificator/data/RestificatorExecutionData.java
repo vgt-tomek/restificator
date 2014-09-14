@@ -78,8 +78,8 @@ public class RestificatorExecutionData {
 	
 	@Override
 	public String toString() {
-		return "RestificatorExecutionData [\nsettings=" + settings + ",\nglobalHeaders=" + globalHeaders
-				+ ",\nparameters=" + parameters + ",\ntasks=" + tasks + ",\nrequests=" + requests + "\n]";
+		return "RestificatorExecutionData [settings=" + settings + ", globalHeaders=" + globalHeaders + ", parameters="
+				+ parameters + ", tasks=" + tasks + ", requests=" + requests + "]";
 	}
 	
 }
