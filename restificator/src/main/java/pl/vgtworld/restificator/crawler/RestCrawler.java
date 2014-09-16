@@ -3,10 +3,16 @@ package pl.vgtworld.restificator.crawler;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
+import pl.vgtworld.restificator.data.executionqueue.Task;
 import pl.vgtworld.restificator.data.parameters.Parameter;
 
 public class RestCrawler {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(RestCrawler.class);
 	
 	private ParametersScanner parametersScanner = new ParametersScanner();
 	
@@ -20,5 +26,11 @@ public class RestCrawler {
 				readParameters,
 				data.getParameters().getPredefinedParameters()
 				);
+		
+		List<Task> tasks = data.getTasks();
+		for (Task task : tasks) {
+			LOGGER.debug("Execute task {}", task.getName());
+			//TODO
+		}
 	}
 }
