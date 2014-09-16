@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.data.executionqueue.Task;
 import pl.vgtworld.restificator.data.parameters.Parameter;
+import pl.vgtworld.restificator.data.requests.Request;
 
 public class RestCrawler {
 	
@@ -30,6 +31,11 @@ public class RestCrawler {
 		List<Task> tasks = data.getTasks();
 		for (Task task : tasks) {
 			LOGGER.debug("Execute task {}", task.getName());
+			switch (task.getType()) {
+			case REQUEST:
+				Request request = data.getRequests().get(task.getName());
+				break;
+			}
 			//TODO
 		}
 	}
