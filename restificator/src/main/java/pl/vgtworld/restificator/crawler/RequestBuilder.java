@@ -72,8 +72,9 @@ class RequestBuilder {
 	private void findAndReplacePlaceholder(StringBuilder text, Parameter parameter) {
 		String placeholder = prefix + parameter.getName() + suffix;
 		int index = text.indexOf(placeholder);
-		if (index > -1) {
+		while (index > -1) {
 			text.replace(index, index + placeholder.length(), parameter.getParameterValue());
+			index = text.indexOf(placeholder);
 		}
 	}
 }
