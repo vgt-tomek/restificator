@@ -13,6 +13,7 @@ import pl.vgtworld.restificator.data.executionqueue.Task;
 import pl.vgtworld.restificator.data.parameters.Parameter;
 import pl.vgtworld.restificator.data.requests.Request;
 import pl.vgtworld.restificator.network.NetworkConnector;
+import pl.vgtworld.restificator.stats.ExecutionStatistics;
 
 public class RestCrawler {
 	
@@ -22,24 +23,25 @@ public class RestCrawler {
 	
 	private ParametersMapper parametersMapper = new ParametersMapper();
 	
-	public void executeScript(RestificatorExecutionData data) throws ExecutionException {
+	public ExecutionStatistics executeScript(RestificatorExecutionData data) throws ExecutionException {
 		try {
 			List<Parameter> readParameters = readParameters(data);
 			
 			Map<String, Parameter> mergedParameters = mergeparameters(data, readParameters);
 			
-			executeTasks(data, mergedParameters);
+			return executeTasks(data, mergedParameters);
 		} catch (IOException e) {
 			throw new ExecutionException(e.getMessage(), e);
 		}
 	}
 
-	private void executeTasks(RestificatorExecutionData data, Map<String, Parameter> mergedParameters)
+	private ExecutionStatistics executeTasks(RestificatorExecutionData data, Map<String, Parameter> mergedParameters)
 			throws UnknownHostException, IOException {
 		RequestBuilder requestBuilder = new RequestBuilder(data.getGlobalHeaders(), mergedParameters);
 		requestBuilder.setPlaceholderBoundaries(data.getSettings().getPlaceholderPrefix(), data.getSettings().getPlaceholderSuffix());
 		int connectionPort = Integer.parseInt(data.getSettings().getPort());
 		NetworkConnector connector = new NetworkConnector(data.getSettings().getHost(), connectionPort);
+		ExecutionStatistics stats = new ExecutionStatistics();
 		List<Task> tasks = data.getTasks();
 		for (Task task : tasks) {
 			LOGGER.debug("Execute task {}", task.getName());
@@ -47,10 +49,14 @@ public class RestCrawler {
 			case REQUEST:
 				Request requestTemplate = data.getRequests().get(task.getName());
 				String request = requestBuilder.buildRequest(requestTemplate);
+				long startTime = System.currentTimeMillis();
 				String response = connector.makeRequest(request);
+				long endTime = System.currentTimeMillis();
+				stats.addExecutedRequest(task.getName(), request, response, startTime, endTime);
 				break;
 			}
 		}
+		return stats;
 	}
 
 	private Map<String, Parameter> mergeparameters(RestificatorExecutionData data, List<Parameter> readParameters) {

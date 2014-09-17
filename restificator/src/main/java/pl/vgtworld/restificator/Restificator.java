@@ -9,6 +9,7 @@ import pl.vgtworld.restificator.crawler.RestCrawler;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.loader.LoadException;
 import pl.vgtworld.restificator.loader.ScriptLoader;
+import pl.vgtworld.restificator.stats.ExecutionStatistics;
 
 public class Restificator {
 	
@@ -39,7 +40,8 @@ public class Restificator {
 					RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
 					RestCrawler crawler = new RestCrawler();
 					LOGGER.debug("Execute script: " + scriptData);
-					crawler.executeScript(scriptData);
+					ExecutionStatistics statistics = crawler.executeScript(scriptData);
+					OUTPUT.info("" + statistics);
 				} catch (ExecutionException e) {
 					OUTPUT.error("There was an error while executing script");
 					LOGGER.debug("Exception while executing script", e);
