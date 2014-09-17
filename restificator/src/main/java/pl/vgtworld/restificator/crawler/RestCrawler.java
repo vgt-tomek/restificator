@@ -52,6 +52,8 @@ public class RestCrawler {
 				long startTime = System.currentTimeMillis();
 				String response = connector.makeRequest(request);
 				long endTime = System.currentTimeMillis();
+				LOGGER.debug("Request: {}", request);
+				LOGGER.debug("Response: {}", response);
 				stats.addExecutedRequest(task.getName(), request, response, startTime, endTime);
 				break;
 			}
