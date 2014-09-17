@@ -35,6 +35,9 @@ class RequestBuilder {
 		request.append(requestTemplate.getType()).append(" ").append(requestTemplate.getPath()).append(" HTTP/1.0\n");
 		
 		addHeadersToRequest(requestTemplate, request);
+		for (Parameter param : parameters.values()) {
+			findAndReplacePlaceholder(request, param);
+		}
 		
 		if (requestTemplate.getBody() != null && requestTemplate.getBody().length() > 0) {
 			requestBody.append(requestTemplate.getBody());
