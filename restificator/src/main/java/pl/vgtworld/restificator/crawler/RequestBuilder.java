@@ -31,16 +31,18 @@ class RequestBuilder {
 
 	public String buildRequest(Request requestTemplate) {
 		StringBuilder request = new StringBuilder();
+		StringBuilder requestBody = new StringBuilder();
 		request.append(requestTemplate.getType()).append(" ").append(requestTemplate.getPath()).append(" HTTP/1.0\n");
 		
 		addHeadersToRequest(requestTemplate, request);
-		for (Parameter param : parameters.values()) {
-			findAndReplacePlaceholder(request, param);
-		}
 		
 		if (requestTemplate.getBody() != null && requestTemplate.getBody().length() > 0) {
-			request.append("Content-length: ").append(requestTemplate.getBody().length()).append("\n\n");
-			request.append(requestTemplate.getBody());
+			requestBody.append(requestTemplate.getBody());
+			for (Parameter param : parameters.values()) {
+				findAndReplacePlaceholder(requestBody, param);
+			}
+			request.append("Content-length: ").append(requestBody.length()).append("\n\n");
+			request.append(requestBody.toString());
 		}
 		
 		
