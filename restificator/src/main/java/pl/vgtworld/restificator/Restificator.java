@@ -4,6 +4,7 @@ import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pl.vgtworld.restificator.crawler.ExecutionException;
 import pl.vgtworld.restificator.crawler.RestCrawler;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.loader.LoadException;
@@ -33,11 +34,16 @@ public class Restificator {
 				OUTPUT.info("Editing script is not supported in this version.");
 				break;
 			case EXECUTE:
-				LOGGER.debug("Load script from " + cmdParser.getFilePath());
-				RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
-				RestCrawler crawler = new RestCrawler();
-				LOGGER.debug("Execute script: " + scriptData);
-				crawler.executeScript(scriptData);
+				try {
+					LOGGER.debug("Load script from " + cmdParser.getFilePath());
+					RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
+					RestCrawler crawler = new RestCrawler();
+					LOGGER.debug("Execute script: " + scriptData);
+					crawler.executeScript(scriptData);
+				} catch (ExecutionException e) {
+					OUTPUT.error("There was an error while executing script");
+					LOGGER.debug("Exception while executing script", e);
+				}
 				break;
 			case HELP:
 				cmdParser.displayHelp();
