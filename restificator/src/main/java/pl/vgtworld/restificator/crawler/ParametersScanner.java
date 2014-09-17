@@ -24,13 +24,16 @@ class ParametersScanner {
 				OUTPUT.info(description);
 			}
 			String parameterValue = parameter.getParameterValue();
-			if (parameterValue.length() > 0) {
+			if (parameterValue != null && parameterValue.length() > 0) {
 				OUTPUT.info("Default value (if left empty): " + parameterValue);
 			}
-			OUTPUT.info("New value?");
-			String readValue = scanner.nextLine().trim();
-			if (readValue.length() == 0) {
-				readValue = parameterValue;
+			String readValue = null;
+			while (readValue == null || readValue.length() == 0) {
+				OUTPUT.info("New value?");
+				readValue = scanner.nextLine().trim();
+				if (readValue.length() == 0) {
+					readValue = parameterValue;
+				}
 			}
 			Text finalParameter = new Text(parameter.getName(), readValue);
 			finalParameters.add(finalParameter);
