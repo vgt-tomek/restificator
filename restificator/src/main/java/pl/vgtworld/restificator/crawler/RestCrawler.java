@@ -48,10 +48,8 @@ public class RestCrawler {
 				Request requestTemplate = data.getRequests().get(task.getName());
 				String request = requestBuilder.buildRequest(requestTemplate);
 				String response = connector.makeRequest(request);
-				System.out.println(request+"\n"+response+"\n");
 				break;
 			}
-			//TODO
 		}
 	}
 
