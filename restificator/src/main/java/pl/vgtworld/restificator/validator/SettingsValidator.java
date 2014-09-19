@@ -9,6 +9,7 @@ class SettingsValidator {
 		SETTINGS_REQUIRED("Settings node is required."),
 		HOST_REQUIRED("Host in settings is missing."),
 		PORT_REQUIRED("Port in settings is missing."),
+		PORT_INVALID_VALUE("Port should be a number."),
 		PREFIX_REQUIRED("Placeholder prefix in settings is missing."),
 		SUFFIX_REQUIRED("Placeholder suffix in settings is missing.");
 		
@@ -37,6 +38,14 @@ class SettingsValidator {
 		}
 		if (settings.getPort() == null || settings.getPort().length() == 0) {
 			throw new XmlValidationException(ErrorMessages.PORT_REQUIRED.getMessage());
+		}
+		try {
+			int port = Integer.parseInt(settings.getPort());
+			if (port <= 0) {
+				throw new XmlValidationException(ErrorMessages.PORT_INVALID_VALUE.getMessage());
+			}
+		} catch (NumberFormatException e) {
+			throw new XmlValidationException(ErrorMessages.PORT_INVALID_VALUE.getMessage(), e);
 		}
 	}
 	
