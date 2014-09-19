@@ -14,6 +14,8 @@ public class XmlValidator {
 		try {
 			SettingsValidator settings = new SettingsValidator();
 			settings.validate(data.getSettings());
+			GlobalHeadersValidator globalHeaders = new GlobalHeadersValidator();
+			globalHeaders.validate(data.getGlobalHeaders());
 			return true;
 		} catch (XmlValidationException e) {
 			error = e.getMessage();
