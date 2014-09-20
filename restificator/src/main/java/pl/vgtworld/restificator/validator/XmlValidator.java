@@ -16,6 +16,8 @@ public class XmlValidator {
 			settings.validate(data.getSettings());
 			GlobalHeadersValidator globalHeaders = new GlobalHeadersValidator();
 			globalHeaders.validate(data.getGlobalHeaders());
+			ParametersValidator parameters = new ParametersValidator();
+			parameters.validate(data.getParameters());
 			return true;
 		} catch (XmlValidationException e) {
 			error = e.getMessage();
