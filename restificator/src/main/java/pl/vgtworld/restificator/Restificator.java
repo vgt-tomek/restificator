@@ -10,6 +10,7 @@ import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.loader.LoadException;
 import pl.vgtworld.restificator.loader.ScriptLoader;
 import pl.vgtworld.restificator.stats.ExecutionStatistics;
+import pl.vgtworld.restificator.validator.XmlValidator;
 
 public class Restificator {
 	
@@ -38,6 +39,11 @@ public class Restificator {
 				try {
 					LOGGER.debug("Load script from " + cmdParser.getFilePath());
 					RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
+					XmlValidator validator = new XmlValidator();
+					if (validator.validate(scriptData) == false) {
+						OUTPUT.error("Validation error: {}", validator.getError());
+						return;
+					}
 					RestCrawler crawler = new RestCrawler();
 					LOGGER.debug("Execute script: " + scriptData);
 					ExecutionStatistics statistics = crawler.executeScript(scriptData);

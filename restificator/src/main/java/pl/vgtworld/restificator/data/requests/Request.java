@@ -1,6 +1,5 @@
 package pl.vgtworld.restificator.data.requests;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,7 +18,7 @@ public class Request {
 	
 	@XmlElementWrapper(name = "headers")
 	@XmlElement(name = "header")
-	private List<Header> headers = new ArrayList<>();
+	private List<Header> headers;
 	
 	private String body;
 	
