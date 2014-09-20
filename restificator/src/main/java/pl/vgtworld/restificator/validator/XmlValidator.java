@@ -18,6 +18,8 @@ public class XmlValidator {
 			globalHeaders.validate(data.getGlobalHeaders());
 			ParametersValidator parameters = new ParametersValidator();
 			parameters.validate(data.getParameters());
+			RequestsValidator requests = new RequestsValidator();
+			requests.validate(data.getRequests());
 			return true;
 		} catch (XmlValidationException e) {
 			error = e.getMessage();
