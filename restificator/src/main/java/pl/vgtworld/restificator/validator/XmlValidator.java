@@ -20,6 +20,8 @@ public class XmlValidator {
 			parameters.validate(data.getParameters());
 			RequestsValidator requests = new RequestsValidator();
 			requests.validate(data.getRequests());
+			TasksValidator tasks = new TasksValidator();
+			tasks.validate(data.getTasks(), data.getRequests());
 			return true;
 		} catch (XmlValidationException e) {
 			error = e.getMessage();
