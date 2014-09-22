@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 class CmdParser {
 	
 	public enum Action {
-		CREATE, EDIT, EXECUTE, HELP
+		CREATE, EDIT, EXECUTE, HELP, VERSION
 	};
 	
 	private static final String FILE_OPTION = "file";
@@ -25,8 +25,10 @@ class CmdParser {
 	
 	private static final String HELP_OPTION = "help";
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(CmdParser.class);
+	private static final String VERSION_OPTION = "version";
 	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CmdParser.class);
+
 	private Options coreOptions;
 	
 	private Options additionalOptions;
@@ -49,6 +51,10 @@ class CmdParser {
 		cmd = parser.parse(additionalOptions, args);
 		if (cmd.hasOption(HELP_OPTION)) {
 			activeAction = Action.HELP;
+			return;
+		}
+		if (cmd.hasOption(VERSION_OPTION)) {
+			activeAction = Action.VERSION;
 			return;
 		}
 		cmd = parser.parse(coreOptions, args);
@@ -101,6 +107,9 @@ class CmdParser {
 		
 		Option helpOption = new Option(null, HELP_OPTION, false, "Help screen");
 		options.addOption(helpOption);
+		
+		Option versionOption = new Option(null, VERSION_OPTION, false, "Display version");
+		options.addOption(versionOption);
 		
 		return options;
 	}
