@@ -61,6 +61,7 @@ public class Restificator {
 			case VERSION:
 				Properties properties = new Properties();
 				OUTPUT.info("Restificator version: {}", properties.getVersion());
+				OUTPUT.info("Build timestamp: {}", properties.getBuildTimestamp());
 				break;
 			}
 		} catch (ParseException | LoadException | IOException e) {
