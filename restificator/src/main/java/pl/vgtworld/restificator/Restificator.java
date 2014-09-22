@@ -1,5 +1,7 @@
 package pl.vgtworld.restificator;
 
+import java.io.IOException;
+
 import org.apache.commons.cli.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,8 +58,12 @@ public class Restificator {
 			case HELP:
 				cmdParser.displayHelp();
 				break;
+			case VERSION:
+				Properties properties = new Properties();
+				OUTPUT.info("Restificator version: {}", properties.getVersion());
+				break;
 			}
-		} catch (ParseException | LoadException e) {
+		} catch (ParseException | LoadException | IOException e) {
 			OUTPUT.info(e.getMessage());
 		}
 	}
