@@ -1,0 +1,86 @@
+<restificator>
+	
+	<settings>
+		<host>127.0.0.1</host>
+		<port>80</port>
+		<placeholderPrefix>{{</placeholderPrefix>
+		<placeholderSuffix>}}</placeholderSuffix>
+	</settings>
+	
+	<globalHeaders>
+		<header>
+			<name>Connection</name>
+			<value>close</value>
+		</header>
+	</globalHeaders>
+	
+	<parameters>
+		<interactive>
+			<text>
+				<name>i-1</name>
+				<description>predefined text with default</description>
+				<value>dsa</value>
+			</text>
+			<text>
+				<name>i-2</name>
+				<description>predefined text</description>
+			</text>
+		</interactive>
+		<predefined>
+			<text>
+				<name>p-1</name>
+				<description>predefined text</description>
+				<value>dsa</value>
+			</text>
+			<counter>
+				<name>p-2</name>
+				<description>predefined counter</description>
+				<value>21</value>
+			</counter>
+			<datetime>
+				<name>date-placeholder</name>
+				<pattern>yyyy-MM-dd</pattern>
+			</datetime>
+		</predefined>
+	</parameters>
+	
+	<tasks>
+		<task>
+			<type>REQUEST</type>
+			<name>GET</name>
+		</task>
+		<task>
+			<type>REQUEST</type>
+			<name>POST</name>
+		</task>
+	</tasks>
+	
+	<requests>
+		<entry>
+			<key>GET</key>
+			<value>
+				<headers />
+				<type>GET</type>
+				<path>/</path>
+			</value>
+		</entry>
+		<entry>
+			<key>POST</key>
+			<value>
+				<headers>
+					<header>
+						<name>Content-Type</name>
+						<value>application/x-www-form-urlencoded</value>
+					</header>
+					<header>
+						<name>xxx-vgt-custom</name>
+						<value>{{date-placeholder}}</value>
+					</header>
+				</headers>
+				<type>POST</type>
+				<path>/vgt/post.php?date={{date-placeholder}}</path>
+				<body><![CDATA[asd=dsa&currentDate={{date-placeholder}}&i1={{i-1}}&i2={{i-2}}]]></body>
+			</value>
+		</entry>
+	</requests>
+</restificator>
