@@ -2,16 +2,13 @@ package pl.vgtworld.restificator.validator;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
 
 import pl.vgtworld.restificator.data.headers.Header;
 import pl.vgtworld.restificator.data.requests.Request;
-import pl.vgtworld.restificator.data.requests.RequestType;
 
 public class RequestsValidatorTest {
 	
@@ -36,7 +33,7 @@ public class RequestsValidatorTest {
 		String expectedErrorMessage = RequestsValidator.ErrorMessages.KEY_REQUIRED.getMessage();
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		requests.put(null, createValidRequest());
+		requests.put(null, RequestsFactory.getNewInstance());
 		
 		try {
 			validator.validate(requests);
@@ -52,7 +49,7 @@ public class RequestsValidatorTest {
 		String expectedErrorMessage = RequestsValidator.ErrorMessages.KEY_REQUIRED.getMessage();
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		requests.put("", createValidRequest());
+		requests.put("", RequestsFactory.getNewInstance());
 		
 		try {
 			validator.validate(requests);
@@ -92,7 +89,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		invalidRequest.setHeaders(null);
 		requests.put(invalidRequestKey, invalidRequest);
 		
@@ -114,7 +111,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		Header invalidHeader = new Header();
 		invalidHeader.setValue("header-value");
 		invalidRequest.getHeaders().add(invalidHeader);
@@ -138,7 +135,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		Header invalidHeader = new Header();
 		invalidHeader.setName("");
 		invalidHeader.setValue("header-value");
@@ -165,7 +162,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		Header invalidHeader = new Header();
 		invalidHeader.setName(invalidHeaderName);
 		invalidHeader.setValue(null);
@@ -192,7 +189,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		Header invalidHeader = new Header();
 		invalidHeader.setName(invalidHeaderName);
 		invalidHeader.setValue("");
@@ -219,7 +216,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		Header firstHeader = new Header();
 		firstHeader.setName(invalidHeaderName);
 		firstHeader.setValue("first-value");
@@ -248,7 +245,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		invalidRequest.setType(null);
 		requests.put(invalidRequestKey, invalidRequest);
 		
@@ -270,7 +267,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		invalidRequest.setPath(null);
 		requests.put(invalidRequestKey, invalidRequest);
 		
@@ -292,7 +289,7 @@ public class RequestsValidatorTest {
 				);
 		String errorMessage = null;
 		Map<String, Request> requests = new HashMap<>();
-		Request invalidRequest = createValidRequest();
+		Request invalidRequest = RequestsFactory.getNewInstance();
 		invalidRequest.setPath("");
 		requests.put(invalidRequestKey, invalidRequest);
 		
@@ -308,23 +305,9 @@ public class RequestsValidatorTest {
 	@Test
 	public void shouldAcceptValidRequestsMap() throws XmlValidationException {
 		Map<String, Request> requests = new HashMap<>();
-		requests.put("request-key", createValidRequest());
+		requests.put("request-key", RequestsFactory.getNewInstance());
 		
 		validator.validate(requests);
-	}
-	
-	private Request createValidRequest() {
-		Request request = new Request();
-		List<Header> headers = new ArrayList<>();
-		Header header = new Header();
-		header.setName("header-name");
-		header.setValue("header-value");
-		headers.add(header);
-		request.setHeaders(headers);
-		request.setType(RequestType.POST);
-		request.setPath("/request/path");
-		request.setBody("request body");
-		return request;
 	}
 	
 }
