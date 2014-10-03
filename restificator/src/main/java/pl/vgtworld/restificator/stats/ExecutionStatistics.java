@@ -17,6 +17,9 @@ public class ExecutionStatistics {
 		StringBuilder builder = new StringBuilder();
 		for (ExecutedRequest request : executedRequests) {
 			builder.append(request).append("\n");
+			if (!request.getResponse().getStatusCode().equals("200")) {
+				builder.append(request.getResponse().getBody()).append("\n");
+			}
 		}
 		return builder.toString();
 	}

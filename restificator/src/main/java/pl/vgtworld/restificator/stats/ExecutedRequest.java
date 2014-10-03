@@ -5,7 +5,7 @@ class ExecutedRequest {
 	private String name;
 	
 	private String request;
-	
+
 	private ResponseData response;
 	
 	private long startTime;
@@ -18,6 +18,10 @@ class ExecutedRequest {
 		this.response = new ResponseData(response);
 		this.startTime = startTime;
 		this.endTime = endTime;
+	}
+
+	public ResponseData getResponse() {
+		return response;
 	}
 
 	@Override

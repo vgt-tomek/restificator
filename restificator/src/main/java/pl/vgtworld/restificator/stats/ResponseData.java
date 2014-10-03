@@ -9,13 +9,20 @@ class ResponseData {
 
 	private String statusCode;
 
+	private String body;
+
 	ResponseData(String response) {
 		rawResponse = response;
 		parseStatusCode();
+		parseBody();
 	}
 
-	public String getStatusCode() {
+	String getStatusCode() {
 		return statusCode;
+	}
+
+	String getBody() {
+		return body;
 	}
 
 	private void parseStatusCode() {
@@ -39,4 +46,17 @@ class ResponseData {
 		}
 	}
 
+	private void parseBody() {
+		if (rawResponse == null || rawResponse.isEmpty()) {
+			body = "N/A";
+			return;
+		}
+		String emptyLineMarker = "\n\n";
+		int emptyLineIndex = rawResponse.indexOf(emptyLineMarker);
+		if (emptyLineIndex == -1) {
+			body = "N/A";
+			return;
+		}
+		body = rawResponse.substring(emptyLineIndex + emptyLineMarker.length());
+	}
 }

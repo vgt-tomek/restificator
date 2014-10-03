@@ -42,4 +42,32 @@ public class ResponseDataTest {
 
 		Assertions.assertThat(response.getStatusCode()).isEqualTo(RESPONSE_STATUS_CODE);
 	}
+
+	@Test
+	public void shouldUseNotAvailableAsBodyWhenResponseIsNull() {
+		ResponseData response = new ResponseData(null);
+
+		Assertions.assertThat(response.getBody()).isEqualTo("N/A");
+	}
+
+	@Test
+	public void shouldUseNotAvailableAsBodyWhenResponseUseInvalidOneLineFormat() {
+		ResponseData response = new ResponseData("invalid response");
+
+		Assertions.assertThat(response.getBody()).isEqualTo("N/A");
+	}
+
+	@Test
+	public void shouldUseNotAvailableAsBodyWhenResponseUseInvalidMultiLineFormat() {
+		ResponseData response = new ResponseData("invalid response\nmultiline");
+
+		Assertions.assertThat(response.getBody()).isEqualTo("N/A");
+	}
+
+	@Test
+	public void shouldSuccessfullyExtractBodyFromValidResponse() {
+		ResponseData response = new ResponseData(EXAMPLE_RESPONSE);
+
+		Assertions.assertThat(response.getBody()).isEqualTo(RESPONSE_BODY);
+	}
 }
