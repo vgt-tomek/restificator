@@ -6,7 +6,7 @@ class ExecutedRequest {
 	
 	private String request;
 	
-	private String response;
+	private ResponseData response;
 	
 	private long startTime;
 	
@@ -15,7 +15,7 @@ class ExecutedRequest {
 	public ExecutedRequest(String name, String request, String response, long startTime, long endTime) {
 		this.name = name;
 		this.request = request;
-		this.response = response;
+		this.response = new ResponseData(response);
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
@@ -25,9 +25,9 @@ class ExecutedRequest {
 		return String.format(
 				"%s: Response:%s, Time:%dms",
 				name,
-				response.substring(0, response.indexOf("\n")),
+				response.getStatusCode(),
 				endTime - startTime
 				);
 	}
-	
+
 }
