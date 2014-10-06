@@ -1,8 +1,5 @@
 package pl.vgtworld.restificator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -16,12 +13,10 @@ import org.slf4j.LoggerFactory;
 class CmdParser {
 	
 	public enum Action {
-		GUI, CREATE, EDIT, EXECUTE, HELP, VERSION
-	};
+		GUI, EXECUTE, HELP, VERSION
+	}
 	
 	private static final String FILE_OPTION = "file";
-	
-	private static final String ACTION_OPTION = "action";
 	
 	private static final String HELP_OPTION = "help";
 	
@@ -29,20 +24,14 @@ class CmdParser {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(CmdParser.class);
 
-	private Options coreOptions;
-	
-	private Options additionalOptions;
-	
+	private Options options;
+
 	private CommandLine cmd;
-	
-	private List<String> actionAllowedValues;
 	
 	private Action activeAction;
 	
 	CmdParser() {
-		initializeAllowedValues();
-		initializeCoreOptions();
-		initializeAdditionalOptions();
+		options = initializeOptions();
 	}
 	
 	void parse(String[] args) throws ParseException {
@@ -52,7 +41,7 @@ class CmdParser {
 		}
 		CommandLineParser parser = new BasicParser();
 		LOGGER.debug("Parsing arguments: {}", (Object) args);
-		cmd = parser.parse(additionalOptions, args);
+		cmd = parser.parse(options, args);
 		if (cmd.hasOption(HELP_OPTION)) {
 			activeAction = Action.HELP;
 			return;
@@ -61,19 +50,15 @@ class CmdParser {
 			activeAction = Action.VERSION;
 			return;
 		}
-		cmd = parser.parse(coreOptions, args);
-		if (!actionAllowedValues.contains(cmd.getOptionValue(ACTION_OPTION))) {
-			throw new ParseException("Unknown action. See --help for more information.");
+		if (cmd.hasOption(FILE_OPTION)) {
+			activeAction = Action.EXECUTE;
+			return;
 		}
-		activeAction = Action.valueOf(cmd.getOptionValue(ACTION_OPTION).toUpperCase());
+		throw new ParseException("Invalid usage. See --help for more information.");
 	}
 	
 	Action getAction() {
 		return activeAction;
-	}
-	
-	boolean hasOption(String option) {
-		return cmd.hasOption(option);
 	}
 	
 	String getFilePath() {
@@ -82,32 +67,19 @@ class CmdParser {
 	
 	void displayHelp() {
 		HelpFormatter help = new HelpFormatter();
-		help.printHelp("java -jar restificator.jar [parameters]", coreOptions);
+		help.printHelp(
+				"java -jar restificator.jar [parameters]",
+				"",
+				options,
+				"If no parameters are provided, GUI version is executed."
+		);
 	}
-	
-	private void initializeCoreOptions() {
-		coreOptions = initializeOptions(true);
-	}
-	
-	private void initializeAdditionalOptions() {
-		additionalOptions = initializeOptions(false);
-	}
-	
-	private Options initializeOptions(boolean restrictRequired) {
+
+	private Options initializeOptions() {
 		Options options = new Options();
 		
-		Option fileOption = new Option(null, FILE_OPTION, true, "Path to script file");
-		if (restrictRequired) {
-			fileOption.setRequired(true);
-		}
+		Option fileOption = new Option(null, FILE_OPTION, true, "Path to script file, that should be executed");
 		options.addOption(fileOption);
-		
-		Option actionOption = new Option(null, ACTION_OPTION, true, "Action to take on file "
-				+ actionAllowedValues.toString());
-		if (restrictRequired) {
-			actionOption.setRequired(true);
-		}
-		options.addOption(actionOption);
 		
 		Option helpOption = new Option(null, HELP_OPTION, false, "Help screen");
 		options.addOption(helpOption);
@@ -118,10 +90,4 @@ class CmdParser {
 		return options;
 	}
 	
-	private void initializeAllowedValues() {
-		actionAllowedValues = new ArrayList<>();
-		for (Action action : Action.values()) {
-			actionAllowedValues.add(action.toString().toLowerCase());
-		}
-	}
 }

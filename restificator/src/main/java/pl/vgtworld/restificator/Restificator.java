@@ -31,14 +31,6 @@ public class Restificator {
 			CmdParser cmdParser = new CmdParser();
 			cmdParser.parse(args);
 			switch (cmdParser.getAction()) {
-			case CREATE:
-				LOGGER.debug("Create new script");
-				OUTPUT.info("Creating new script is not supported in this version.");
-				break;
-			case EDIT:
-				LOGGER.debug("Edit existing script");
-				OUTPUT.info("Editing script is not supported in this version.");
-				break;
 			case EXECUTE:
 				try {
 					LOGGER.debug("Load script from " + cmdParser.getFilePath());
