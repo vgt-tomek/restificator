@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator;
 
+import java.awt.*;
 import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import pl.vgtworld.restificator.crawler.ExecutionException;
 import pl.vgtworld.restificator.crawler.RestCrawler;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
+import pl.vgtworld.restificator.gui.MainWindow;
 import pl.vgtworld.restificator.loader.LoadException;
 import pl.vgtworld.restificator.loader.ScriptLoader;
 import pl.vgtworld.restificator.stats.ExecutionStatistics;
@@ -42,7 +44,7 @@ public class Restificator {
 					LOGGER.debug("Load script from " + cmdParser.getFilePath());
 					RestificatorExecutionData scriptData = loadScript(cmdParser.getFilePath());
 					XmlValidator validator = new XmlValidator();
-					if (validator.validate(scriptData) == false) {
+					if (!validator.validate(scriptData)) {
 						OUTPUT.error("Validation error: {}", validator.getError());
 						return;
 					}
@@ -62,6 +64,15 @@ public class Restificator {
 				Properties properties = new Properties();
 				OUTPUT.info("Restificator version: {}", properties.getVersion());
 				OUTPUT.info("Build timestamp: {}", properties.getBuildTimestamp());
+				break;
+			case GUI:
+				EventQueue.invokeLater(new Runnable() {
+					@Override
+					public void run() {
+						MainWindow window = new MainWindow();
+						window.setVisible(true);
+					}
+				});
 				break;
 			}
 		} catch (ParseException | LoadException | IOException e) {
