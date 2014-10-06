@@ -24,11 +24,6 @@ public class CmdParserTest {
 	private CmdParser cmdParser = new CmdParser();
 	
 	@Test(expected = ParseException.class)
-	public void shouldThrowExceptionWhenCalledWithoutParameters() throws ParseException {
-		cmdParser.parse(new String[] {});
-	}
-	
-	@Test(expected = ParseException.class)
 	public void shouldThrowExceptionWhenFileParameterIsMissing() throws ParseException {
 		cmdParser.parse(new String[] { ACTION_PARAMETER_NAME, ACTION_EXECUTE });
 	}

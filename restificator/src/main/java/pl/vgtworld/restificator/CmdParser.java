@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 class CmdParser {
 	
 	public enum Action {
-		CREATE, EDIT, EXECUTE, HELP, VERSION
+		GUI, CREATE, EDIT, EXECUTE, HELP, VERSION
 	};
 	
 	private static final String FILE_OPTION = "file";
@@ -46,6 +46,10 @@ class CmdParser {
 	}
 	
 	void parse(String[] args) throws ParseException {
+		if (args.length == 0) {
+			activeAction = Action.GUI;
+			return;
+		}
 		CommandLineParser parser = new BasicParser();
 		LOGGER.debug("Parsing arguments: {}", (Object) args);
 		cmd = parser.parse(additionalOptions, args);
