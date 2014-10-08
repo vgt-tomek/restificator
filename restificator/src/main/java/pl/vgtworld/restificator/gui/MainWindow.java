@@ -18,5 +18,6 @@ public class MainWindow extends JFrame {
 		setLayout(new BorderLayout());
 
 		add(new ButtonBar(), BorderLayout.PAGE_START);
+		add(new TabbedPane(), BorderLayout.CENTER);
 	}
 }
