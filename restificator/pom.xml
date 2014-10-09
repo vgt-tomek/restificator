@@ -20,6 +20,13 @@
 			<version>1.2</version>
 		</dependency>
 
+        <!-- cdi -->
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se</artifactId>
+            <version>2.2.5.Final</version>
+        </dependency>
+
 		<!-- unit tests -->
 		<dependency>
 			<groupId>junit</groupId>

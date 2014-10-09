@@ -1,12 +1,23 @@
 package pl.vgtworld.restificator.gui;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
 
+@Singleton
 public class MainWindow extends JFrame {
 
-	public MainWindow() {
+	@Inject
+	private ButtonBar buttonBar;
+
+	@Inject
+	private TabbedPane tabbedPane;
+
+	@PostConstruct
+	private void init() {
 		setTitle("Restificator");
 		setSize(800, 600);
 		setLocationRelativeTo(null);
@@ -17,7 +28,7 @@ public class MainWindow extends JFrame {
 	private void buildGui() {
 		setLayout(new BorderLayout());
 
-		add(new ButtonBar(), BorderLayout.PAGE_START);
-		add(new TabbedPane(), BorderLayout.CENTER);
+		add(buttonBar, BorderLayout.PAGE_START);
+		add(tabbedPane, BorderLayout.CENTER);
 	}
 }

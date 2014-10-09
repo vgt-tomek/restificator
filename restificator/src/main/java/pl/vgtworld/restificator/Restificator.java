@@ -4,6 +4,8 @@ import java.awt.*;
 import java.io.IOException;
 
 import org.apache.commons.cli.ParseException;
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,7 +63,9 @@ public class Restificator {
 				EventQueue.invokeLater(new Runnable() {
 					@Override
 					public void run() {
-						MainWindow window = new MainWindow();
+						Weld weld = new Weld();
+						WeldContainer container = weld.initialize();
+						MainWindow window = container.instance().select(MainWindow.class).get();
 						window.setVisible(true);
 					}
 				});
@@ -76,4 +80,5 @@ public class Restificator {
 		ScriptLoader loader = new ScriptLoader();
 		return loader.load(path);
 	}
+
 }
