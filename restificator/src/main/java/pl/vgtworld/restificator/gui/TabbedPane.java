@@ -1,7 +1,9 @@
 package pl.vgtworld.restificator.gui;
 
+import javax.inject.Singleton;
 import javax.swing.JTabbedPane;
 
+@Singleton
 public class TabbedPane extends JTabbedPane {
 
 	public TabbedPane() {
