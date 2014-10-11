@@ -1,6 +1,6 @@
 package pl.vgtworld.restificator.gui.actions;
 
-import pl.vgtworld.restificator.gui.TabbedPane;
+import pl.vgtworld.restificator.gui.tabs.TabbedPane;
 import pl.vgtworld.restificator.service.CdiTestService;
 
 import javax.annotation.PostConstruct;

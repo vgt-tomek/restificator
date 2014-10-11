@@ -1,5 +1,7 @@
 package pl.vgtworld.restificator.gui;
 
+import pl.vgtworld.restificator.gui.tabs.TabbedPane;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Singleton;
