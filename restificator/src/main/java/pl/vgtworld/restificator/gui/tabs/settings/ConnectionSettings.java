@@ -37,4 +37,9 @@ class ConnectionSettings extends JPanel {
 		gbc.setGrid(0, 3).setGridSize(1, 1).setWeight(100, 100).setInsets(5).setAnchor(Anchor.CENTER).setFill(Fill.HORIZONTAL);
 		add(port, gbc);
 	}
+
+	public void cleanData() {
+		host.setText(null);
+		port.setText(null);
+	}
 }

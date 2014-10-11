@@ -30,4 +30,9 @@ public class SettingsPanel extends JPanel {
 		gbc.setGrid(0, 2).setGridSize(1, 1).setWeight(100, 100).setInsets(5).setFill(Fill.BOTH);
 		add(new JPanel(), gbc);
 	}
+
+	public void cleanData() {
+		connection.cleanData();
+		placeholders.cleanData();
+	}
 }

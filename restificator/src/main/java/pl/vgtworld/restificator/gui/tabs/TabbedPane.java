@@ -21,4 +21,8 @@ public class TabbedPane extends JTabbedPane {
 		addTab("Tasks", null);
 		addTab("Requests", null);
 	}
+
+	public void cleanData() {
+		settings.cleanData();
+	}
 }
