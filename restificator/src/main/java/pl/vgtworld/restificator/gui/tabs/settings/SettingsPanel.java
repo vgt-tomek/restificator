@@ -41,4 +41,13 @@ public class SettingsPanel extends JPanel {
 		connection.fillWithData(data);
 		placeholders.fillWithData(data);
 	}
+
+	public Settings readData() {
+		Settings data = new Settings();
+		data.setHost(connection.getHostValue());
+		data.setPort(connection.getPortValue());
+		data.setPlaceholderPrefix(placeholders.getPrefixValue());
+		data.setPlaceholderSuffix(placeholders.getSuffixValue());
+		return data;
+	}
 }

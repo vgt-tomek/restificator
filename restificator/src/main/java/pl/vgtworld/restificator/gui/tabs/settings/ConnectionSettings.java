@@ -48,4 +48,12 @@ class ConnectionSettings extends JPanel {
 		host.setText(data.getHost());
 		port.setText(data.getPort());
 	}
+
+	String getHostValue() {
+		return host.getText();
+	}
+
+	String getPortValue() {
+		return port.getText();
+	}
 }

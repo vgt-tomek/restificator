@@ -30,4 +30,10 @@ public class TabbedPane extends JTabbedPane {
 	public void fillWithData(RestificatorExecutionData data) {
 		settings.fillWithData(data.getSettings());
 	}
+
+	public RestificatorExecutionData readData() {
+		RestificatorExecutionData data = new RestificatorExecutionData();
+		data.setSettings(settings.readData());
+		return data;
+	}
 }

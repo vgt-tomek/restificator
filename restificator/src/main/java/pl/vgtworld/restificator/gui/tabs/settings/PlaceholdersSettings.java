@@ -48,4 +48,12 @@ class PlaceholdersSettings extends JPanel {
 		prefix.setText(data.getPlaceholderPrefix());
 		suffix.setText(data.getPlaceholderSuffix());
 	}
+
+	String getPrefixValue() {
+		return prefix.getText();
+	}
+
+	String getSuffixValue() {
+		return suffix.getText();
+	}
 }
