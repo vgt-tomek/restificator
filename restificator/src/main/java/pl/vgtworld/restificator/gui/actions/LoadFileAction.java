@@ -2,7 +2,10 @@ package pl.vgtworld.restificator.gui.actions;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.gui.tabs.TabbedPane;
+import pl.vgtworld.restificator.loader.LoadException;
+import pl.vgtworld.restificator.loader.ScriptLoader;
 import pl.vgtworld.restificator.utils.RestificatorFileFilter;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -34,7 +38,7 @@ public class LoadFileAction extends AbstractAction {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
 		openDialog.showOpenDialog(pane);
 		File selectedFile = openDialog.getSelectedFile();
 		if (selectedFile == null) {
@@ -42,6 +46,14 @@ public class LoadFileAction extends AbstractAction {
 			return;
 		}
 		LOGGER.debug("Start loading file: {}", selectedFile.getName());
-		//TODO Load file and fill components with data from file.
+		try {
+			ScriptLoader loader = new ScriptLoader();
+			RestificatorExecutionData loadedData = loader.load(selectedFile);
+			pane.fillWithData(loadedData);
+		} catch (LoadException e) {
+			String message = e.getMessage();
+			JOptionPane.showMessageDialog(pane, message, "Loading error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
+
 }

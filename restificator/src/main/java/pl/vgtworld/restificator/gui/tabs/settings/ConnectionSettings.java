@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.settings;
 
+import pl.vgtworld.restificator.data.settings.Settings;
 import pl.vgtworld.utils.awt.Anchor;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
@@ -41,5 +42,10 @@ class ConnectionSettings extends JPanel {
 	public void cleanData() {
 		host.setText(null);
 		port.setText(null);
+	}
+
+	public void fillWithData(Settings data) {
+		host.setText(data.getHost());
+		port.setText(data.getPort());
 	}
 }

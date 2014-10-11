@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.settings;
 
+import pl.vgtworld.restificator.data.settings.Settings;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
 
@@ -34,5 +35,10 @@ public class SettingsPanel extends JPanel {
 	public void cleanData() {
 		connection.cleanData();
 		placeholders.cleanData();
+	}
+
+	public void fillWithData(Settings data) {
+		connection.fillWithData(data);
+		placeholders.fillWithData(data);
 	}
 }

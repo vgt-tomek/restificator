@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs;
 
+import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.gui.tabs.settings.SettingsPanel;
 
 import javax.annotation.PostConstruct;
@@ -24,5 +25,9 @@ public class TabbedPane extends JTabbedPane {
 
 	public void cleanData() {
 		settings.cleanData();
+	}
+
+	public void fillWithData(RestificatorExecutionData data) {
+		settings.fillWithData(data.getSettings());
 	}
 }

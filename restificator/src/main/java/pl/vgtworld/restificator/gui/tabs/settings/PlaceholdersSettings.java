@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.settings;
 
+import pl.vgtworld.restificator.data.settings.Settings;
 import pl.vgtworld.utils.awt.Anchor;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
@@ -41,5 +42,10 @@ class PlaceholdersSettings extends JPanel {
 	public void cleanData() {
 		prefix.setText(null);
 		suffix.setText(null);
+	}
+
+	public void fillWithData(Settings data) {
+		prefix.setText(data.getPlaceholderPrefix());
+		suffix.setText(data.getPlaceholderSuffix());
 	}
 }
