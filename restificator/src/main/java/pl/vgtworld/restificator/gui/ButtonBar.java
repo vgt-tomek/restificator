@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui;
 
+import pl.vgtworld.restificator.gui.actions.LoadFileAction;
 import pl.vgtworld.restificator.gui.actions.NewFileAction;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,8 @@ public class ButtonBar extends JPanel {
 	@Inject
 	private NewFileAction newFileAction;
 
-	private JButton loadButton = new JButton("Load");
+	@Inject
+	private LoadFileAction loadFileAction;
 
 	private JButton saveButton = new JButton("Save");
 
@@ -24,7 +26,7 @@ public class ButtonBar extends JPanel {
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 
 		add(new JButton(newFileAction));
-		add(loadButton);
+		add(new JButton(loadFileAction));
 		add(saveButton);
 	}
 }
