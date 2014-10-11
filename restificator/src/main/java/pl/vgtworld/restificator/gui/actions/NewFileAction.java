@@ -1,6 +1,5 @@
 package pl.vgtworld.restificator.gui.actions;
 
-import pl.vgtworld.restificator.gui.services.DataService;
 import pl.vgtworld.restificator.gui.tabs.TabbedPane;
 
 import javax.annotation.PostConstruct;
@@ -15,9 +14,6 @@ public class NewFileAction extends AbstractAction {
 	@Inject
 	private TabbedPane tabbedPane;
 
-	@Inject
-	DataService data;
-
 	@PostConstruct
 	private void init() {
 		putValue(NAME, "New");
@@ -25,7 +21,6 @@ public class NewFileAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		data.cleanData();
 		tabbedPane.cleanData();
 	}
 
