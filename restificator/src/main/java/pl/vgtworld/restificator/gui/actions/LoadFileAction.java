@@ -3,6 +3,7 @@ package pl.vgtworld.restificator.gui.actions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
+import pl.vgtworld.restificator.gui.MainWindow;
 import pl.vgtworld.restificator.gui.tabs.TabbedPane;
 import pl.vgtworld.restificator.loader.LoadException;
 import pl.vgtworld.restificator.loader.ScriptLoader;
@@ -10,6 +11,7 @@ import pl.vgtworld.restificator.utils.RestificatorFileFilter;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
@@ -26,6 +28,9 @@ public class LoadFileAction extends AbstractAction {
 
 	@Inject
 	private TabbedPane pane;
+
+	@Inject
+	private Provider<MainWindow> mainWindowProvider;
 
 	@PostConstruct
 	private void init() {
@@ -50,6 +55,7 @@ public class LoadFileAction extends AbstractAction {
 			ScriptLoader loader = new ScriptLoader();
 			RestificatorExecutionData loadedData = loader.load(selectedFile);
 			pane.fillWithData(loadedData);
+			mainWindowProvider.get().setEditedFile(selectedFile.getAbsolutePath());
 		} catch (LoadException e) {
 			String message = e.getMessage();
 			JOptionPane.showMessageDialog(pane, message, "Loading error", JOptionPane.ERROR_MESSAGE);
