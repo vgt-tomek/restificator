@@ -2,6 +2,7 @@ package pl.vgtworld.restificator.gui;
 
 import pl.vgtworld.restificator.gui.actions.LoadFileAction;
 import pl.vgtworld.restificator.gui.actions.NewFileAction;
+import pl.vgtworld.restificator.gui.actions.SaveFileAction;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -19,7 +20,8 @@ public class ButtonBar extends JPanel {
 	@Inject
 	private LoadFileAction loadFileAction;
 
-	private JButton saveButton = new JButton("Save");
+	@Inject
+	private SaveFileAction saveFileAction;
 
 	@PostConstruct
 	private void buildGui() {
@@ -27,6 +29,6 @@ public class ButtonBar extends JPanel {
 
 		add(new JButton(newFileAction));
 		add(new JButton(loadFileAction));
-		add(saveButton);
+		add(new JButton(saveFileAction));
 	}
 }
