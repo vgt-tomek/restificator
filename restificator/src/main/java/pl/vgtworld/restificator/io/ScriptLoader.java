@@ -1,4 +1,4 @@
-package pl.vgtworld.restificator.loader;
+package pl.vgtworld.restificator.io;
 
 import java.io.File;
 
@@ -32,8 +32,8 @@ public class ScriptLoader {
 			}
 			return scriptData;
 		} catch (JAXBException e) {
-			LOGGER.debug("JAXBException throwed while loading script file.", e);
-			throw new LoadException(e.getMessage(), e);
+			LOGGER.warn("JAXBException throwed while loading script file.", e);
+			throw new LoadException("Error while trying to load file.", e);
 		}
 	}
 	

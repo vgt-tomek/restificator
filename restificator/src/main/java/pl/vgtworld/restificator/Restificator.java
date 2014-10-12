@@ -13,8 +13,8 @@ import pl.vgtworld.restificator.crawler.ExecutionException;
 import pl.vgtworld.restificator.crawler.RestCrawler;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.gui.MainWindow;
-import pl.vgtworld.restificator.loader.LoadException;
-import pl.vgtworld.restificator.loader.ScriptLoader;
+import pl.vgtworld.restificator.io.LoadException;
+import pl.vgtworld.restificator.io.ScriptLoader;
 import pl.vgtworld.restificator.stats.ExecutionStatistics;
 import pl.vgtworld.restificator.validator.XmlValidator;
 

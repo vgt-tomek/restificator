@@ -1,10 +1,11 @@
 package pl.vgtworld.restificator.gui.actions;
 
+import pl.vgtworld.restificator.gui.MainWindow;
 import pl.vgtworld.restificator.gui.tabs.TabbedPane;
-import pl.vgtworld.restificator.service.CdiTestService;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
@@ -13,10 +14,10 @@ import java.awt.event.ActionEvent;
 public class NewFileAction extends AbstractAction {
 
 	@Inject
-	private CdiTestService testService;
+	private TabbedPane tabbedPane;
 
 	@Inject
-	private TabbedPane tabbedPane;
+	private Provider<MainWindow> mainWindowProvider;
 
 	@PostConstruct
 	private void init() {
@@ -25,8 +26,8 @@ public class NewFileAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		testService.doSomething();
-		tabbedPane.setEnabled(!tabbedPane.isEnabled());
+		tabbedPane.cleanData();
+		mainWindowProvider.get().setEditedFile(null);
 	}
 
 }

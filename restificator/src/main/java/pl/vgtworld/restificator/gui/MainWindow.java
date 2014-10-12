@@ -12,15 +12,32 @@ import java.awt.BorderLayout;
 @Singleton
 public class MainWindow extends JFrame {
 
+	private static final String FRAME_TITLE = "Restificator";
+
 	@Inject
 	private ButtonBar buttonBar;
 
 	@Inject
 	private TabbedPane tabbedPane;
 
+	private String editedFile;
+
+	public String getEditedFile() {
+		return editedFile;
+	}
+
+	public void setEditedFile(String file) {
+		editedFile = file;
+		if (file == null) {
+			setTitle(FRAME_TITLE);
+		} else {
+			setTitle(String.format("%s - %s", FRAME_TITLE, editedFile));
+		}
+	}
+
 	@PostConstruct
 	private void init() {
-		setTitle("Restificator");
+		setTitle(FRAME_TITLE);
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

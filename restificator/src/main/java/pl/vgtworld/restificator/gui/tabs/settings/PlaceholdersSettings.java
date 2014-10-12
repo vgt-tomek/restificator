@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.settings;
 
+import pl.vgtworld.restificator.data.settings.Settings;
 import pl.vgtworld.utils.awt.Anchor;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
@@ -36,5 +37,23 @@ class PlaceholdersSettings extends JPanel {
 		add(suffixLabel, gbc);
 		gbc.setGrid(0, 3).setGridSize(1, 1).setWeight(100, 100).setInsets(5).setAnchor(Anchor.CENTER).setFill(Fill.HORIZONTAL);
 		add(suffix, gbc);
+	}
+
+	public void cleanData() {
+		prefix.setText(null);
+		suffix.setText(null);
+	}
+
+	public void fillWithData(Settings data) {
+		prefix.setText(data.getPlaceholderPrefix());
+		suffix.setText(data.getPlaceholderSuffix());
+	}
+
+	String getPrefixValue() {
+		return prefix.getText();
+	}
+
+	String getSuffixValue() {
+		return suffix.getText();
 	}
 }

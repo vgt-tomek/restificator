@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.settings;
 
+import pl.vgtworld.restificator.data.settings.Settings;
 import pl.vgtworld.utils.awt.Anchor;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
@@ -36,5 +37,23 @@ class ConnectionSettings extends JPanel {
 		add(portLabel, gbc);
 		gbc.setGrid(0, 3).setGridSize(1, 1).setWeight(100, 100).setInsets(5).setAnchor(Anchor.CENTER).setFill(Fill.HORIZONTAL);
 		add(port, gbc);
+	}
+
+	public void cleanData() {
+		host.setText(null);
+		port.setText(null);
+	}
+
+	public void fillWithData(Settings data) {
+		host.setText(data.getHost());
+		port.setText(data.getPort());
+	}
+
+	String getHostValue() {
+		return host.getText();
+	}
+
+	String getPortValue() {
+		return port.getText();
 	}
 }
