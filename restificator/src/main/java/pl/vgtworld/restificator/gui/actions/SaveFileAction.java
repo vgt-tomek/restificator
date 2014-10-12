@@ -1,14 +1,19 @@
 package pl.vgtworld.restificator.gui.actions;
 
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
+import pl.vgtworld.restificator.gui.MainWindow;
 import pl.vgtworld.restificator.gui.tabs.TabbedPane;
+import pl.vgtworld.restificator.io.SaveException;
+import pl.vgtworld.restificator.io.ScriptSerializer;
 import pl.vgtworld.restificator.utils.RestificatorFileFilter;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 
 @Singleton
@@ -18,6 +23,9 @@ public class SaveFileAction extends AbstractAction {
 
 	@Inject
 	private TabbedPane pane;
+
+	@Inject
+	private Provider<MainWindow> mainWindowProvider;
 
 	@PostConstruct
 	private void init() {
@@ -30,8 +38,19 @@ public class SaveFileAction extends AbstractAction {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent event) {
+		String editedFilepath = mainWindowProvider.get().getEditedFile();
+		if (editedFilepath == null) {
+			//TODO Redirect action to SaveFileAsAction.
+			JOptionPane.showMessageDialog(pane, "Unsupported operation", "Saving error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		RestificatorExecutionData data = pane.readData();
-		//TODO Save data to xml file.
+		ScriptSerializer serializer = new ScriptSerializer();
+		try {
+			serializer.save(data, editedFilepath);
+		} catch (SaveException e) {
+			JOptionPane.showMessageDialog(pane, e.getMessage(), "Saving error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
