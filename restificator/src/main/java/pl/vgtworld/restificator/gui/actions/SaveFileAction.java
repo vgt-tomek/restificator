@@ -13,6 +13,7 @@ import javax.inject.Singleton;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 @Singleton
 public class SaveFileAction extends AbstractAction {
@@ -29,6 +30,7 @@ public class SaveFileAction extends AbstractAction {
 	@PostConstruct
 	private void init() {
 		putValue(NAME, "Save");
+		putValue(MNEMONIC_KEY, KeyEvent.VK_S);
 	}
 
 	@Override

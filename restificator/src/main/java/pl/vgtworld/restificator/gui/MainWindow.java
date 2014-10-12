@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui;
 
+import pl.vgtworld.restificator.gui.menu.RestificatorMenu;
 import pl.vgtworld.restificator.gui.tabs.TabbedPane;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,9 @@ public class MainWindow extends JFrame {
 
 	@Inject
 	private TabbedPane tabbedPane;
+
+	@Inject
+	private RestificatorMenu menu;
 
 	private String editedFile;
 
@@ -41,6 +45,7 @@ public class MainWindow extends JFrame {
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setJMenuBar(menu);
 		buildGui();
 	}
 
