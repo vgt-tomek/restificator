@@ -17,6 +17,7 @@ public class ScriptSerializer {
 		try {
 			JAXBContext context = JAXBContext.newInstance(RestificatorExecutionData.class);
 			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			marshaller.marshal(data, file);
 		} catch (JAXBException e) {
 			throw new SaveException("Unable to serialize data.", e);
