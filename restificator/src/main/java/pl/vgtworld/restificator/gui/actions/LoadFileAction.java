@@ -17,6 +17,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 @Singleton
@@ -35,6 +36,7 @@ public class LoadFileAction extends AbstractAction {
 	@PostConstruct
 	private void init() {
 		putValue(NAME, "Load");
+		putValue(MNEMONIC_KEY, KeyEvent.VK_L);
 		openDialog = new JFileChooser();
 		openDialog.setFileFilter(new RestificatorFileFilter());
 		openDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);

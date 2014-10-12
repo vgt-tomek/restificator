@@ -9,6 +9,7 @@ import javax.inject.Provider;
 import javax.inject.Singleton;
 import javax.swing.AbstractAction;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 
 @Singleton
 public class NewFileAction extends AbstractAction {
@@ -22,6 +23,7 @@ public class NewFileAction extends AbstractAction {
 	@PostConstruct
 	private void init() {
 		putValue(NAME, "New");
+		putValue(MNEMONIC_KEY, KeyEvent.VK_N);
 	}
 
 	@Override

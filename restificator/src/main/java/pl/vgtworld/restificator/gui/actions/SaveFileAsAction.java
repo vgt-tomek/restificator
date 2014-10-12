@@ -14,6 +14,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 public class SaveFileAsAction extends AbstractAction {
@@ -29,6 +30,7 @@ public class SaveFileAsAction extends AbstractAction {
 	@PostConstruct
 	private void init() {
 		putValue(NAME, "Save As");
+		putValue(MNEMONIC_KEY, KeyEvent.VK_A);
 		saveDialog = new JFileChooser();
 		saveDialog.setFileFilter(new RestificatorFileFilter());
 		saveDialog.setFileSelectionMode(JFileChooser.FILES_ONLY);
