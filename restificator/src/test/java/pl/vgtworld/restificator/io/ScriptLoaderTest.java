@@ -1,4 +1,4 @@
-package pl.vgtworld.restificator.loader;
+package pl.vgtworld.restificator.io;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

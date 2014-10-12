@@ -1,4 +1,4 @@
-package pl.vgtworld.restificator.loader;
+package pl.vgtworld.restificator.io;
 
 import java.io.File;
 

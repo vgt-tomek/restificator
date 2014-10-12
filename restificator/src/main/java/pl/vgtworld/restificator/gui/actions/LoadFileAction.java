@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
 import pl.vgtworld.restificator.gui.MainWindow;
 import pl.vgtworld.restificator.gui.tabs.TabbedPane;
-import pl.vgtworld.restificator.loader.LoadException;
-import pl.vgtworld.restificator.loader.ScriptLoader;
+import pl.vgtworld.restificator.io.LoadException;
+import pl.vgtworld.restificator.io.ScriptLoader;
 import pl.vgtworld.restificator.utils.RestificatorFileFilter;
 
 import javax.annotation.PostConstruct;
