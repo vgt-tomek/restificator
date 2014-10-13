@@ -70,7 +70,18 @@ class TableModel extends AbstractTableModel {
 		return null;
 	}
 
-	public void addRow() {
-		rows.add(new DataRow());
+	public void clearData() {
+		int rowCount = rows.size();
+		rows.clear();
+		fireTableRowsDeleted(1, rowCount);
+	}
+
+	public void addRow(String name, String value) {
+		DataRow newRow = new DataRow();
+		newRow.name = name;
+		newRow.value = value;
+		rows.add(newRow);
+		int newRowCount = rows.size();
+		fireTableRowsInserted(newRowCount, newRowCount);
 	}
 }

@@ -33,6 +33,7 @@ public class TabbedPane extends JTabbedPane {
 
 	public void fillWithData(RestificatorExecutionData data) {
 		settings.fillWithData(data.getSettings());
+		globalHeaders.fillWithData(data.getGlobalHeaders());
 	}
 
 	public RestificatorExecutionData readData() {
