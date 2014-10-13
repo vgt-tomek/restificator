@@ -21,11 +21,6 @@ class TableModel extends AbstractTableModel {
 	private List<DataRow> rows = new ArrayList<>();
 
 	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return true;
-	}
-
-	@Override
 	public int getRowCount() {
 
 		return rows.size();
@@ -39,20 +34,6 @@ class TableModel extends AbstractTableModel {
 	@Override
 	public String getColumnName(int column) {
 		return columnNames[column];
-	}
-
-	@Override
-	public void setValueAt(Object value, int rowIndex, int columnIndex) {
-		if (columnIndex > 1 || rowIndex > rows.size() - 1) {
-			throw new IndexOutOfBoundsException();
-		}
-		DataRow row = rows.get(rowIndex);
-		if (columnIndex == 0) {
-			row.name = value.toString();
-		}
-		if (columnIndex == 1) {
-			row.value = value.toString();
-		}
 	}
 
 	@Override
