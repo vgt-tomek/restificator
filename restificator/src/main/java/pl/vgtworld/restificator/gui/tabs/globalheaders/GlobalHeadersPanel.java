@@ -17,6 +17,10 @@ public class GlobalHeadersPanel extends JPanel {
 	@Inject
 	private TableModel model;
 
+	public void cleanData() {
+		model.clearData();
+	}
+
 	public void fillWithData(List<Header> globalHeaders) {
 		model.clearData();
 		for (Header header : globalHeaders) {

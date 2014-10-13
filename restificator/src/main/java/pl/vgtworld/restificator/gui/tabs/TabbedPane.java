@@ -29,6 +29,7 @@ public class TabbedPane extends JTabbedPane {
 
 	public void cleanData() {
 		settings.cleanData();
+		globalHeaders.cleanData();
 	}
 
 	public void fillWithData(RestificatorExecutionData data) {
