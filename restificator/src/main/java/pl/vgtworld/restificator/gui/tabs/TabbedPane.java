@@ -1,6 +1,7 @@
 package pl.vgtworld.restificator.gui.tabs;
 
 import pl.vgtworld.restificator.data.RestificatorExecutionData;
+import pl.vgtworld.restificator.gui.tabs.globalheaders.GlobalHeadersPanel;
 import pl.vgtworld.restificator.gui.tabs.settings.SettingsPanel;
 
 import javax.annotation.PostConstruct;
@@ -14,10 +15,13 @@ public class TabbedPane extends JTabbedPane {
 	@Inject
 	private SettingsPanel settings;
 
+	@Inject
+	private GlobalHeadersPanel globalHeaders;
+
 	@PostConstruct
 	private void buildGui() {
 		addTab("Settings", settings);
-		addTab("Global headers", null);
+		addTab("Global headers", globalHeaders);
 		addTab("Parameters", null);
 		addTab("Tasks", null);
 		addTab("Requests", null);
