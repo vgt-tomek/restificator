@@ -17,6 +17,8 @@ public class GlobalHeadersPanel extends JPanel {
 	@Inject
 	private TableModel model;
 
+	@Inject ButtonBar buttonBar;
+
 	public void cleanData() {
 		model.clearData();
 	}
@@ -31,6 +33,7 @@ public class GlobalHeadersPanel extends JPanel {
 	@PostConstruct
 	private void init() {
 		setLayout(new BorderLayout());
+		add(buttonBar, BorderLayout.PAGE_START);
 		add(new JScrollPane(new JTable(model)), BorderLayout.CENTER);
 	}
 
