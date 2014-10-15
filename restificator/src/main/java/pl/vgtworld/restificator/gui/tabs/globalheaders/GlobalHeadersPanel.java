@@ -43,6 +43,13 @@ public class GlobalHeadersPanel extends JPanel {
 		table.getSelectionModel().clearSelection();
 	}
 
+	Header getRow(int index) {
+		return model.getRow(index);
+	}
+
+	void updateRow(int index, Header header) {
+		model.updateRow(index, header);
+	}
 	@PostConstruct
 	private void init() {
 		setLayout(new BorderLayout());

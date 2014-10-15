@@ -1,5 +1,7 @@
 package pl.vgtworld.restificator.gui.tabs.globalheaders;
 
+import pl.vgtworld.restificator.data.headers.Header;
+
 import javax.inject.Singleton;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -68,6 +70,22 @@ class TableModel extends AbstractTableModel {
 
 	void deleteRow(int index) {
 		rows.remove(index);
-		fireTableRowsDeleted(index + 1, index + 1);
+		fireTableRowsDeleted(index, index);
 	}
+
+	Header getRow(int index) {
+		DataRow row = rows.get(index);
+		Header header = new Header();
+		header.setName(row.name);
+		header.setValue(row.value);
+		return header;
+	}
+
+	void updateRow(int index, Header header) {
+		DataRow dataRow = rows.get(index);
+		dataRow.name = header.getName();
+		dataRow.value = header.getValue();
+		fireTableRowsUpdated(index, index);
+	}
+
 }

@@ -31,6 +31,13 @@ class GlobalHeaderFormDialog extends JDialog {
 		init();
 	}
 
+	GlobalHeaderFormDialog(JFrame owner, String name, String value) {
+		super(owner, true);
+		init();
+		this.name.setText(name);
+		this.value.setText(value);
+	}
+
 	public String getName() {
 		return name.getText();
 	}
