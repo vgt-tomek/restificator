@@ -51,18 +51,23 @@ class TableModel extends AbstractTableModel {
 		return null;
 	}
 
-	public void clearData() {
+	void clearData() {
 		int rowCount = rows.size();
 		rows.clear();
 		fireTableRowsDeleted(1, rowCount);
 	}
 
-	public void addRow(String name, String value) {
+	void addRow(String name, String value) {
 		DataRow newRow = new DataRow();
 		newRow.name = name;
 		newRow.value = value;
 		rows.add(newRow);
 		int newRowCount = rows.size();
 		fireTableRowsInserted(newRowCount, newRowCount);
+	}
+
+	void deleteRow(int index) {
+		rows.remove(index);
+		fireTableRowsDeleted(index + 1, index + 1);
 	}
 }

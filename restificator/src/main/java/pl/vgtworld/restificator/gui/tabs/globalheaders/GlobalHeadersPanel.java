@@ -24,6 +24,7 @@ public class GlobalHeadersPanel extends JPanel {
 	public void cleanData() {
 		model.clearData();
 		buttonBar.setEnabledDeleteButton(false);
+		buttonBar.setEnabledEditButton(false);
 	}
 
 	public void fillWithData(List<Header> globalHeaders) {
@@ -35,6 +36,11 @@ public class GlobalHeadersPanel extends JPanel {
 
 	int[] getSelectedRows() {
 		return table.getSelectedRows();
+	}
+
+	void deleteRow(int index) {
+		model.deleteRow(index);
+		table.getSelectionModel().clearSelection();
 	}
 
 	@PostConstruct
