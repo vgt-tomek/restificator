@@ -5,6 +5,14 @@
 	<artifactId>restificator</artifactId>
 	<version>0.2.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>vgt-repository</id>
+            <name>VGT repository</name>
+            <url>http://maven.vgtworld.pl</url>
+        </repository>
+    </repositories>
+
 	<properties>
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
