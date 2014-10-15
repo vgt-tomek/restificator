@@ -13,10 +13,19 @@ class ButtonBar extends JPanel {
 	@Inject
 	private NewGlobalHeaderAction newHeaderAction;
 
+	@Inject
+	private DeleteGlobalHeadersAction deleteHeadersAction;
+
+	private JButton deleteHeadersButton;
+
 	@PostConstruct
 	private void init() {
+		deleteHeadersButton = new JButton(deleteHeadersAction);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 
+		deleteHeadersButton.setEnabled(false);
+
 		add(new JButton(newHeaderAction));
+		add(deleteHeadersButton);
 	}
 }
