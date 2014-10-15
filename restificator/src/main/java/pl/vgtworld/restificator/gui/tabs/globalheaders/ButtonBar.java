@@ -18,6 +18,10 @@ class ButtonBar extends JPanel {
 
 	private JButton deleteHeadersButton;
 
+	void setEnabledDeleteButton(boolean state) {
+		deleteHeadersButton.setEnabled(state);
+	}
+
 	@PostConstruct
 	private void init() {
 		deleteHeadersButton = new JButton(deleteHeadersAction);

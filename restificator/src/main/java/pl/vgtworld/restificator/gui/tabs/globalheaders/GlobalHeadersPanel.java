@@ -19,8 +19,11 @@ public class GlobalHeadersPanel extends JPanel {
 
 	@Inject ButtonBar buttonBar;
 
+	private JTable table;
+
 	public void cleanData() {
 		model.clearData();
+		buttonBar.setEnabledDeleteButton(false);
 	}
 
 	public void fillWithData(List<Header> globalHeaders) {
@@ -30,11 +33,18 @@ public class GlobalHeadersPanel extends JPanel {
 		}
 	}
 
+	int[] getSelectedRows() {
+		return table.getSelectedRows();
+	}
+
 	@PostConstruct
 	private void init() {
 		setLayout(new BorderLayout());
 		add(buttonBar, BorderLayout.PAGE_START);
-		add(new JScrollPane(new JTable(model)), BorderLayout.CENTER);
+		table = new JTable(model);
+		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
+		table.getSelectionModel().addListSelectionListener(selectionListener);
+		add(new JScrollPane(table), BorderLayout.CENTER);
 	}
 
 }
