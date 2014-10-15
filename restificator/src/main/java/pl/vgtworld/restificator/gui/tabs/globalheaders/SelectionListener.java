@@ -18,6 +18,7 @@ class SelectionListener implements ListSelectionListener {
 	public void valueChanged(ListSelectionEvent e) {
 		int[] selectedRows = headersPanel.getSelectedRows();
 		buttonBar.setEnabledDeleteButton(selectedRows.length > 0);
+		buttonBar.setEnabledEditButton(selectedRows.length == 1);
 	}
 
 }
