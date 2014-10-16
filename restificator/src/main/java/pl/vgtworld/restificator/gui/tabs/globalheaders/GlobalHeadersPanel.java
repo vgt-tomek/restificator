@@ -34,6 +34,10 @@ public class GlobalHeadersPanel extends JPanel {
 		}
 	}
 
+	public List<Header> readData() {
+		return model.readData();
+	}
+
 	int[] getSelectedRows() {
 		return table.getSelectedRows();
 	}

@@ -88,4 +88,15 @@ class TableModel extends AbstractTableModel {
 		fireTableRowsUpdated(index, index);
 	}
 
+	List<Header> readData() {
+		List<Header> data = new ArrayList<>();
+		for (DataRow row : rows) {
+			Header header = new Header();
+			header.setName(row.name);
+			header.setValue(row.value);
+			data.add(header);
+		}
+		return data;
+	}
+
 }
