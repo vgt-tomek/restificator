@@ -40,6 +40,8 @@ public class TabbedPane extends JTabbedPane {
 	public RestificatorExecutionData readData() {
 		RestificatorExecutionData data = new RestificatorExecutionData();
 		data.setSettings(settings.readData());
+		data.setGlobalHeaders(globalHeaders.readData());
 		return data;
 	}
+
 }
