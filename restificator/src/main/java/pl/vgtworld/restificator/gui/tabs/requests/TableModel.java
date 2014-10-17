@@ -49,18 +49,18 @@ class TableModel extends AbstractTableModel {
 	void clearData() {
 		int rowCount = rows.size();
 		rows.clear();
-		fireTableRowsDeleted(0, rowCount - 1);
+		fireTableRowsDeleted(1, rowCount);
 	}
 
 	void addRow(TableRowDataModel row) {
 		rows.add(row);
 		int newRowCount = rows.size();
-		fireTableRowsInserted(newRowCount - 1, newRowCount - 1);
+		fireTableRowsInserted(newRowCount, newRowCount);
 	}
 
 	void deleteRow(int index) {
 		rows.remove(index);
-		fireTableRowsDeleted(index, index);
+		fireTableRowsDeleted(index + 1, index + 1);
 	}
 
 	TableRowDataModel getRow(int index) {
@@ -70,7 +70,7 @@ class TableModel extends AbstractTableModel {
 	void updateRow(int index, TableRowDataModel row) {
 		rows.remove(index);
 		rows.add(index, row);
-		fireTableRowsUpdated(index, index);
+		fireTableRowsUpdated(index + 1, index + 1);
 	}
 
 	Map<String, Request> readData() {
