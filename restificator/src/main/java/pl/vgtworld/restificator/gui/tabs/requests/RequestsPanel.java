@@ -20,16 +20,29 @@ public class RequestsPanel extends JPanel {
 	private ButtonBar buttonBar;
 
 	public void cleanData() {
-		//TODO Implement.
+		tableModel.clearData();
+		buttonBar.setEnabledEditButton(false);
+		buttonBar.setEnabledDeleteButton(false);
 	}
 
 	public void fillWithData(Map<String, Request> requests) {
-		//TODO Implement.
+		tableModel.clearData();
+		for (Map.Entry<String, Request> entry : requests.entrySet()) {
+			String name = entry.getKey();
+			Request request = entry.getValue();
+
+			TableRowDataModel tableEntry = new TableRowDataModel();
+			tableEntry.setName(name);
+			tableEntry.setType(request.getType());
+			tableEntry.setPath(request.getPath());
+			tableEntry.setBody(request.getBody());
+			tableEntry.setHeaders(request.getHeaders());
+			tableModel.addRow(tableEntry);
+		}
 	}
 
 	public Map<String, Request> readData() {
-		//TODO Implement.
-		return null;
+		return tableModel.readData();
 	}
 
 	@PostConstruct
