@@ -53,13 +53,18 @@ public class RequestsPanel extends JPanel {
 		return table.getSelectedRows();
 	}
 
+	void deleteRow(int index) {
+		tableModel.deleteRow(index);
+		table.getSelectionModel().clearSelection();
+	}
+
 	@PostConstruct
 	private void init() {
 		table = new JTable(tableModel);
 		JFrame windowAncestor = (JFrame) SwingUtilities.getWindowAncestor(this);
 		NewRequestAction newRequestAction = new NewRequestAction(windowAncestor, tableModel);
 		EditRequestAction editRequestAction = new EditRequestAction();
-		DeleteRequestsAction deleteRequestsAction = new DeleteRequestsAction();
+		DeleteRequestsAction deleteRequestsAction = new DeleteRequestsAction(this);
 		buttonBar = new ButtonBar(newRequestAction, editRequestAction, deleteRequestsAction);
 		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
 		table.getSelectionModel().addListSelectionListener(selectionListener);
