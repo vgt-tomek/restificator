@@ -3,6 +3,7 @@ package pl.vgtworld.restificator.gui.tabs.requests;
 import pl.vgtworld.restificator.data.requests.Request;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -18,6 +19,9 @@ public class RequestsPanel extends JPanel {
 	private JTable table;
 
 	private ButtonBar buttonBar;
+
+	@Inject
+	private NewRequestAction newRequestAction;
 
 	public void cleanData() {
 		tableModel.clearData();
@@ -49,7 +53,6 @@ public class RequestsPanel extends JPanel {
 	private void init() {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
-		NewRequestAction newRequestAction = new NewRequestAction();
 		EditRequestAction editRequestAction = new EditRequestAction();
 		DeleteRequestsAction deleteRequestsAction = new DeleteRequestsAction();
 		buttonBar = new ButtonBar(newRequestAction, editRequestAction, deleteRequestsAction);
