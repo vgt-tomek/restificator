@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.requests.form;
 
+import pl.vgtworld.restificator.gui.tabs.requests.RequestDataModel;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
 
@@ -20,7 +21,7 @@ public class RequestsFormDialog extends JDialog {
 	private boolean saved;
 
 	public RequestsFormDialog(JFrame owner) {
-		super(owner);
+		super(owner, true);
 		leftPanel = new LeftFormPanel();
 		rightPanel = new RightFormPanel();
 		init();
@@ -29,6 +30,16 @@ public class RequestsFormDialog extends JDialog {
 
 	public boolean isSaved() {
 		return saved;
+	}
+
+	public RequestDataModel getFilledData() {
+		RequestDataModel data = new RequestDataModel();
+		data.setName(leftPanel.getRequestName());
+		data.setType(leftPanel.getRequestType());
+		data.setPath(leftPanel.getRequestPath());
+		data.setHeaders(leftPanel.getRequestHeaders());
+		data.setBody(rightPanel.getRequestBody());
+		return data;
 	}
 
 	private void init() {

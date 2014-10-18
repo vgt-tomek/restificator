@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.requests.form;
 
+import pl.vgtworld.restificator.data.headers.Header;
 import pl.vgtworld.restificator.data.requests.RequestType;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
@@ -9,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 class LeftFormPanel extends JPanel {
 
@@ -26,6 +29,23 @@ class LeftFormPanel extends JPanel {
 		path = new JTextField();
 		headers = new HeadersPanel();
 		init();
+	}
+
+	String getRequestName() {
+		return name.getText();
+	}
+
+	RequestType getRequestType() {
+		return type.getItemAt(type.getSelectedIndex());
+	}
+
+	String getRequestPath() {
+		return path.getText();
+	}
+
+	List<Header> getRequestHeaders() {
+		//TODO Implement.
+		return new ArrayList<>();
 	}
 
 	private void init() {

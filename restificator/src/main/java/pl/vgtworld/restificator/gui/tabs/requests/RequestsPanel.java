@@ -14,6 +14,7 @@ import java.util.Map;
 @Singleton
 public class RequestsPanel extends JPanel {
 
+	@Inject
 	private TableModel tableModel;
 
 	private JTable table;
@@ -51,7 +52,6 @@ public class RequestsPanel extends JPanel {
 
 	@PostConstruct
 	private void init() {
-		tableModel = new TableModel();
 		table = new JTable(tableModel);
 		EditRequestAction editRequestAction = new EditRequestAction();
 		DeleteRequestsAction deleteRequestsAction = new DeleteRequestsAction();

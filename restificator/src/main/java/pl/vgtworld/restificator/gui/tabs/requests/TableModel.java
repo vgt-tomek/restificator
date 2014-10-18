@@ -2,12 +2,14 @@ package pl.vgtworld.restificator.gui.tabs.requests;
 
 import pl.vgtworld.restificator.data.requests.Request;
 
+import javax.inject.Singleton;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Singleton
 class TableModel extends AbstractTableModel {
 
 	private String[] columnNames = {"Name", "Type", "Header count"};

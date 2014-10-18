@@ -18,6 +18,10 @@ class RightFormPanel extends JPanel {
 		init();
 	}
 
+	String getRequestBody() {
+		return body.getText();
+	}
+
 	private void init() {
 		JLabel bodyLabel = new JLabel("Body:");
 		GridBagConstraintsImproved gbc = new GridBagConstraintsImproved();
