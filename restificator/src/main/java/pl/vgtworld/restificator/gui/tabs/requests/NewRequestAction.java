@@ -1,38 +1,32 @@
 package pl.vgtworld.restificator.gui.tabs.requests;
 
-import pl.vgtworld.restificator.gui.MainWindow;
 import pl.vgtworld.restificator.gui.tabs.requests.form.RequestsFormDialog;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Provider;
-import javax.inject.Singleton;
 import javax.swing.AbstractAction;
+import javax.swing.JFrame;
 import java.awt.event.ActionEvent;
 
-@Singleton
 class NewRequestAction extends AbstractAction {
 
-	@Inject
-	private Provider<MainWindow> mainWindow;
+	private JFrame mainWindow;
 
-	@Inject
 	private TableModel tableModel;
+
+	NewRequestAction(JFrame owner, TableModel tableModel) {
+		this.mainWindow = owner;
+		this.tableModel = tableModel;
+		putValue(NAME, "New");
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		RequestsFormDialog dialog = new RequestsFormDialog(mainWindow.get());
-		dialog.setLocationRelativeTo(mainWindow.get());
+		RequestsFormDialog dialog = new RequestsFormDialog(mainWindow);
+		dialog.setLocationRelativeTo(mainWindow);
 		dialog.setVisible(true);
 		if (dialog.isSaved()) {
 			tableModel.addRow(dialog.getFilledData());
 		}
 		dialog.dispose();
-	}
-
-	@PostConstruct
-	private void init() {
-		putValue(NAME, "New");
 	}
 
 }

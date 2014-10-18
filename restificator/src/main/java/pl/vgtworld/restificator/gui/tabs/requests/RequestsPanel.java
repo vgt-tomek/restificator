@@ -5,9 +5,11 @@ import pl.vgtworld.restificator.data.requests.Request;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.util.Map;
 
@@ -20,9 +22,6 @@ public class RequestsPanel extends JPanel {
 	private JTable table;
 
 	private ButtonBar buttonBar;
-
-	@Inject
-	private NewRequestAction newRequestAction;
 
 	public void cleanData() {
 		tableModel.clearData();
@@ -57,6 +56,8 @@ public class RequestsPanel extends JPanel {
 	@PostConstruct
 	private void init() {
 		table = new JTable(tableModel);
+		JFrame windowAncestor = (JFrame) SwingUtilities.getWindowAncestor(this);
+		NewRequestAction newRequestAction = new NewRequestAction(windowAncestor, tableModel);
 		EditRequestAction editRequestAction = new EditRequestAction();
 		DeleteRequestsAction deleteRequestsAction = new DeleteRequestsAction();
 		buttonBar = new ButtonBar(newRequestAction, editRequestAction, deleteRequestsAction);
