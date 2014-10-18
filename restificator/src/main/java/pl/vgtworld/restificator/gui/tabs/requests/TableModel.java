@@ -12,7 +12,7 @@ class TableModel extends AbstractTableModel {
 
 	private String[] columnNames = {"Name", "Type", "Header count"};
 
-	private List<TableRowDataModel> rows = new ArrayList<>();
+	private List<RequestDataModel> rows = new ArrayList<>();
 
 	@Override
 	public int getRowCount() {
@@ -34,7 +34,7 @@ class TableModel extends AbstractTableModel {
 		if (columnIndex >= columnNames.length || rowIndex >= rows.size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		TableRowDataModel row = rows.get(rowIndex);
+		RequestDataModel row = rows.get(rowIndex);
 		switch (columnIndex) {
 			case 0:
 				return row.getName();
@@ -52,7 +52,7 @@ class TableModel extends AbstractTableModel {
 		fireTableRowsDeleted(1, rowCount);
 	}
 
-	void addRow(TableRowDataModel row) {
+	void addRow(RequestDataModel row) {
 		rows.add(row);
 		int newRowCount = rows.size();
 		fireTableRowsInserted(newRowCount, newRowCount);
@@ -63,11 +63,11 @@ class TableModel extends AbstractTableModel {
 		fireTableRowsDeleted(index + 1, index + 1);
 	}
 
-	TableRowDataModel getRow(int index) {
+	RequestDataModel getRow(int index) {
 		return rows.get(index);
 	}
 
-	void updateRow(int index, TableRowDataModel row) {
+	void updateRow(int index, RequestDataModel row) {
 		rows.remove(index);
 		rows.add(index, row);
 		fireTableRowsUpdated(index + 1, index + 1);
@@ -75,7 +75,7 @@ class TableModel extends AbstractTableModel {
 
 	Map<String, Request> readData() {
 		Map<String, Request> data = new HashMap<>();
-		for (TableRowDataModel row : rows) {
+		for (RequestDataModel row : rows) {
 			Request request = new Request();
 			request.setType(row.getType());
 			request.setPath(row.getPath());

@@ -31,7 +31,7 @@ public class RequestsPanel extends JPanel {
 			String name = entry.getKey();
 			Request request = entry.getValue();
 
-			TableRowDataModel tableEntry = new TableRowDataModel();
+			RequestDataModel tableEntry = new RequestDataModel();
 			tableEntry.setName(name);
 			tableEntry.setType(request.getType());
 			tableEntry.setPath(request.getPath());

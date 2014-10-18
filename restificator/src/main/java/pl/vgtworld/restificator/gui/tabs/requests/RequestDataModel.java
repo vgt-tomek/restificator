@@ -5,7 +5,7 @@ import pl.vgtworld.restificator.data.requests.RequestType;
 
 import java.util.List;
 
-class TableRowDataModel {
+public class RequestDataModel {
 
 	private String name;
 
