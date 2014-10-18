@@ -50,12 +50,18 @@ public class RequestsPanel extends JPanel {
 		return tableModel.readData();
 	}
 
+	int[] getSelectedRows() {
+		return table.getSelectedRows();
+	}
+
 	@PostConstruct
 	private void init() {
 		table = new JTable(tableModel);
 		EditRequestAction editRequestAction = new EditRequestAction();
 		DeleteRequestsAction deleteRequestsAction = new DeleteRequestsAction();
 		buttonBar = new ButtonBar(newRequestAction, editRequestAction, deleteRequestsAction);
+		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
+		table.getSelectionModel().addListSelectionListener(selectionListener);
 
 		setLayout(new BorderLayout());
 		add(buttonBar, BorderLayout.PAGE_START);
