@@ -1,6 +1,7 @@
 package pl.vgtworld.restificator.gui.tabs.globalheaders;
 
 import pl.vgtworld.restificator.gui.MainWindow;
+import pl.vgtworld.restificator.gui.components.HeaderFormDialog;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -20,7 +21,7 @@ class NewGlobalHeaderAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		GlobalHeaderFormDialog dialog = new GlobalHeaderFormDialog(mainWindow.get());
+		HeaderFormDialog dialog = new HeaderFormDialog(mainWindow.get());
 		dialog.setVisible(true);
 		if (dialog.isSaved()) {
 			model.addRow(dialog.getName(), dialog.getValue());
