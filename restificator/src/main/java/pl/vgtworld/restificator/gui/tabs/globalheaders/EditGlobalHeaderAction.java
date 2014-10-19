@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.vgtworld.restificator.data.headers.Header;
 import pl.vgtworld.restificator.gui.MainWindow;
+import pl.vgtworld.restificator.gui.components.HeaderFormDialog;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -35,7 +36,7 @@ class EditGlobalHeaderAction extends AbstractAction {
 		}
 		int index = selectedRows[0];
 		Header row = globalHeadersPanel.get().getRow(index);
-		GlobalHeaderFormDialog dialog = new GlobalHeaderFormDialog(mainWindow.get(), row.getName(), row.getValue());
+		HeaderFormDialog dialog = new HeaderFormDialog(mainWindow.get(), row.getName(), row.getValue());
 		dialog.setVisible(true);
 		if (dialog.isSaved()) {
 			Header header = new Header();

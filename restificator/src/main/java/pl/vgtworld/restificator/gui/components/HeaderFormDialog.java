@@ -1,4 +1,4 @@
-package pl.vgtworld.restificator.gui.tabs.globalheaders;
+package pl.vgtworld.restificator.gui.components;
 
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 
-class GlobalHeaderFormDialog extends JDialog {
+public class HeaderFormDialog extends JDialog {
 
 	private static final int TEXT_FIELD_SIZE = 20;
 
@@ -26,12 +26,12 @@ class GlobalHeaderFormDialog extends JDialog {
 
 	private boolean saved = false;
 
-	GlobalHeaderFormDialog(JFrame owner) {
+	public HeaderFormDialog(JFrame owner) {
 		super(owner, true);
 		init();
 	}
 
-	GlobalHeaderFormDialog(JFrame owner, String name, String value) {
+	public HeaderFormDialog(JFrame owner, String name, String value) {
 		super(owner, true);
 		init();
 		this.name.setText(name);
