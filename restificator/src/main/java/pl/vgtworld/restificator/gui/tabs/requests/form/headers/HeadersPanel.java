@@ -30,13 +30,18 @@ public class HeadersPanel extends JPanel {
 		return table.getSelectedRows();
 	}
 
+	void deleteRow(int index) {
+		tableModel.deleteRow(index);
+		table.getSelectionModel().clearSelection();
+	}
+
 	private void init() {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
 		JFrame window = (JFrame) SwingUtilities.getWindowAncestor(this);
 		NewHeaderAction newHeaderAction = new NewHeaderAction(window, tableModel);
 		EditHeaderAction editHeaderAction = new EditHeaderAction();
-		DeleteHeadersAction deleteHeadersAction = new DeleteHeadersAction();
+		DeleteHeadersAction deleteHeadersAction = new DeleteHeadersAction(this);
 		buttonBar = new ButtonBar(newHeaderAction, editHeaderAction, deleteHeadersAction);
 		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
 		table.getSelectionModel().addListSelectionListener(selectionListener);
