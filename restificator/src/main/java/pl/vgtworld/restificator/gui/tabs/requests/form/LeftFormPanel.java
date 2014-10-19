@@ -2,6 +2,7 @@ package pl.vgtworld.restificator.gui.tabs.requests.form;
 
 import pl.vgtworld.restificator.data.headers.Header;
 import pl.vgtworld.restificator.data.requests.RequestType;
+import pl.vgtworld.restificator.gui.tabs.requests.form.headers.HeadersPanel;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
 
