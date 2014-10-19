@@ -26,6 +26,10 @@ public class HeadersPanel extends JPanel {
 		return tableModel.readData();
 	}
 
+	int[] getSelectedRows() {
+		return table.getSelectedRows();
+	}
+
 	private void init() {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
@@ -34,6 +38,8 @@ public class HeadersPanel extends JPanel {
 		EditHeaderAction editHeaderAction = new EditHeaderAction();
 		DeleteHeadersAction deleteHeadersAction = new DeleteHeadersAction();
 		buttonBar = new ButtonBar(newHeaderAction, editHeaderAction, deleteHeadersAction);
+		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
+		table.getSelectionModel().addListSelectionListener(selectionListener);
 
 		setLayout(new BorderLayout());
 		add(buttonBar, BorderLayout.PAGE_START);
