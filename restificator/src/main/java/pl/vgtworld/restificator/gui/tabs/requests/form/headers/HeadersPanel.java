@@ -30,6 +30,13 @@ public class HeadersPanel extends JPanel {
 		return table.getSelectedRows();
 	}
 
+	public void fillWithData(List<Header> headers) {
+		tableModel.clearData();
+		for (Header header : headers) {
+			tableModel.addRow(header);
+		}
+	}
+
 	Header getRow(int index) {
 		return tableModel.getRow(index);
 	}
@@ -58,4 +65,5 @@ public class HeadersPanel extends JPanel {
 		add(buttonBar, BorderLayout.PAGE_START);
 		add(new JScrollPane(table), BorderLayout.CENTER);
 	}
+
 }

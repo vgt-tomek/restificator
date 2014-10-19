@@ -25,7 +25,11 @@ public class RequestsFormDialog extends JDialog {
 		leftPanel = new LeftFormPanel();
 		rightPanel = new RightFormPanel();
 		init();
-		setSize(800,600);
+	}
+
+	public RequestsFormDialog(JFrame owner, RequestDataModel data) {
+		this(owner);
+		fillWithData(data);
 	}
 
 	public boolean isSaved() {
@@ -40,6 +44,11 @@ public class RequestsFormDialog extends JDialog {
 		data.setHeaders(leftPanel.getRequestHeaders());
 		data.setBody(rightPanel.getRequestBody());
 		return data;
+	}
+
+	private void fillWithData(RequestDataModel data) {
+		leftPanel.fillWithData(data);
+		rightPanel.fillWithData(data);
 	}
 
 	private void init() {
@@ -74,6 +83,8 @@ public class RequestsFormDialog extends JDialog {
 				setVisible(false);
 			}
 		});
+
+		setSize(800, 600);
 	}
 
 }

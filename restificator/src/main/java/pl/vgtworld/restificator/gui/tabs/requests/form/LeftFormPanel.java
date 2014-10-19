@@ -2,6 +2,7 @@ package pl.vgtworld.restificator.gui.tabs.requests.form;
 
 import pl.vgtworld.restificator.data.headers.Header;
 import pl.vgtworld.restificator.data.requests.RequestType;
+import pl.vgtworld.restificator.gui.tabs.requests.RequestDataModel;
 import pl.vgtworld.restificator.gui.tabs.requests.form.headers.HeadersPanel;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
@@ -24,11 +25,14 @@ class LeftFormPanel extends JPanel {
 	private HeadersPanel headers;
 
 	LeftFormPanel() {
-		name = new JTextField();
-		type = new JComboBox<>(RequestType.values());
-		path = new JTextField();
-		headers = new HeadersPanel();
 		init();
+	}
+
+	void fillWithData(RequestDataModel data) {
+		name.setText(data.getName());
+		type.setSelectedItem(data.getType());
+		path.setText(data.getPath());
+		headers.fillWithData(data.getHeaders());
 	}
 
 	String getRequestName() {
@@ -48,6 +52,10 @@ class LeftFormPanel extends JPanel {
 	}
 
 	private void init() {
+		name = new JTextField();
+		type = new JComboBox<>(RequestType.values());
+		path = new JTextField();
+		headers = new HeadersPanel();
 		JLabel nameLabel = new JLabel("Name:");
 		JLabel typeLabel = new JLabel("Type:");
 		JLabel pathLabel = new JLabel("Path:");

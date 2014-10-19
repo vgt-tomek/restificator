@@ -72,7 +72,7 @@ class TableModel extends AbstractTableModel {
 	void updateRow(int index, RequestDataModel row) {
 		rows.remove(index);
 		rows.add(index, row);
-		fireTableRowsUpdated(index + 1, index + 1);
+		fireTableRowsUpdated(index, index);
 	}
 
 	Map<String, Request> readData() {

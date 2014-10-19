@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.requests.form;
 
+import pl.vgtworld.restificator.gui.tabs.requests.RequestDataModel;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
 
@@ -14,7 +15,6 @@ class RightFormPanel extends JPanel {
 	private JTextArea body;
 
 	RightFormPanel() {
-		body = new JTextArea();
 		init();
 	}
 
@@ -22,7 +22,12 @@ class RightFormPanel extends JPanel {
 		return body.getText();
 	}
 
+	void fillWithData(RequestDataModel data) {
+		body.setText(data.getBody());
+	}
+
 	private void init() {
+		body = new JTextArea();
 		JLabel bodyLabel = new JLabel("Body:");
 		GridBagConstraintsImproved gbc = new GridBagConstraintsImproved();
 
