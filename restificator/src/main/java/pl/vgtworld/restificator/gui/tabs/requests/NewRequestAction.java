@@ -10,11 +10,11 @@ class NewRequestAction extends AbstractAction {
 
 	private JFrame mainWindow;
 
-	private TableModel tableModel;
+	private RequestsPanel requestsPanel;
 
-	NewRequestAction(JFrame owner, TableModel tableModel) {
+	NewRequestAction(JFrame owner, RequestsPanel requestsPanel) {
 		this.mainWindow = owner;
-		this.tableModel = tableModel;
+		this.requestsPanel = requestsPanel;
 		putValue(NAME, "New");
 	}
 
@@ -24,7 +24,7 @@ class NewRequestAction extends AbstractAction {
 		dialog.setLocationRelativeTo(mainWindow);
 		dialog.setVisible(true);
 		if (dialog.isSaved()) {
-			tableModel.addRow(dialog.getFilledData());
+			requestsPanel.addRow(dialog.getFilledData());
 		}
 		dialog.dispose();
 	}

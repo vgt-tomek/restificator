@@ -57,6 +57,10 @@ public class RequestsPanel extends JPanel {
 		return tableModel.getRow(index);
 	}
 
+	void addRow(RequestDataModel row) {
+		tableModel.addRow(row);
+	}
+
 	void deleteRow(int index) {
 		tableModel.deleteRow(index);
 		table.getSelectionModel().clearSelection();
@@ -70,8 +74,8 @@ public class RequestsPanel extends JPanel {
 	private void init() {
 		table = new JTable(tableModel);
 		JFrame windowAncestor = (JFrame) SwingUtilities.getWindowAncestor(this);
-		NewRequestAction newRequestAction = new NewRequestAction(windowAncestor, tableModel);
-		EditRequestAction editRequestAction = new EditRequestAction(this);
+		NewRequestAction newRequestAction = new NewRequestAction(windowAncestor, this);
+		EditRequestAction editRequestAction = new EditRequestAction(windowAncestor, this);
 		DeleteRequestsAction deleteRequestsAction = new DeleteRequestsAction(this);
 		buttonBar = new ButtonBar(newRequestAction, editRequestAction, deleteRequestsAction);
 		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
