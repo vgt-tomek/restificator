@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
 import java.util.List;
 
 class LeftFormPanel extends JPanel {
@@ -45,8 +44,7 @@ class LeftFormPanel extends JPanel {
 	}
 
 	List<Header> getRequestHeaders() {
-		//TODO Implement.
-		return new ArrayList<>();
+		return headers.readData();
 	}
 
 	private void init() {

@@ -1,11 +1,14 @@
 package pl.vgtworld.restificator.gui.tabs.requests.form.headers;
 
+import pl.vgtworld.restificator.data.headers.Header;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
+import java.util.List;
 
 public class HeadersPanel extends JPanel {
 
@@ -17,6 +20,10 @@ public class HeadersPanel extends JPanel {
 
 	public  HeadersPanel() {
 		init();
+	}
+
+	public List<Header> readData() {
+		return tableModel.readData();
 	}
 
 	private void init() {
