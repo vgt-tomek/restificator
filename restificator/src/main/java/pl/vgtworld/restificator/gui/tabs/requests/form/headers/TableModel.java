@@ -66,7 +66,7 @@ class TableModel extends AbstractTableModel {
 	void updateRow(int index, Header row) {
 		rows.remove(index);
 		rows.add(index, row);
-		fireTableRowsUpdated(index + 1, index + 1);
+		fireTableRowsUpdated(index, index);
 	}
 
 	List<Header> readData() {
