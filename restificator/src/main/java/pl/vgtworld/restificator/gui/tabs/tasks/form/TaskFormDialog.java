@@ -1,5 +1,7 @@
 package pl.vgtworld.restificator.gui.tabs.tasks.form;
 
+import pl.vgtworld.restificator.data.executionqueue.Task;
+
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -21,6 +23,13 @@ public class TaskFormDialog extends JDialog {
 
 	public boolean isSaved() {
 		return saved;
+	}
+
+	public Task getFilledData() {
+		Task task = new Task();
+		task.setName(form.getTaskName());
+		task.setType(form.getTaskType());
+		return task;
 	}
 
 	private void init() {

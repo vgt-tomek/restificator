@@ -38,12 +38,16 @@ public class TasksPanel extends JPanel {
 		return tableModel.readData();
 	}
 
+	public void addRow(Task row) {
+		tableModel.addRow(row);
+	}
+
 	@PostConstruct
 	private void init() {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
 		JFrame mainWindow = (JFrame) SwingUtilities.getWindowAncestor(this);
-		NewTaskAction newTaskAction = new NewTaskAction(mainWindow);
+		NewTaskAction newTaskAction = new NewTaskAction(mainWindow, this);
 		EditTaskAction editTaskAction = new EditTaskAction();
 		DeleteTasksAction deleteTasksAction = new DeleteTasksAction();
 		buttonBar = new ButtonBar(newTaskAction, editTaskAction, deleteTasksAction);
@@ -52,4 +56,5 @@ public class TasksPanel extends JPanel {
 		add(buttonBar, BorderLayout.PAGE_START);
 		add(new JScrollPane(table), BorderLayout.CENTER);
 	}
+
 }

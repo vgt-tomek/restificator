@@ -10,9 +10,12 @@ class NewTaskAction extends AbstractAction {
 
 	private JFrame mainWindow;
 
-	NewTaskAction(JFrame mainWindow) {
+	private TasksPanel tasksPanel;
+
+	NewTaskAction(JFrame mainWindow, TasksPanel tasksPanel) {
 		putValue(NAME, "New");
 		this.mainWindow = mainWindow;
+		this.tasksPanel = tasksPanel;
 	}
 
 	@Override
@@ -21,7 +24,7 @@ class NewTaskAction extends AbstractAction {
 		dialog.setLocationRelativeTo(mainWindow);
 		dialog.setVisible(true);
 		if (dialog.isSaved()) {
-			//TODO Add task to tasks panel.
+			tasksPanel.addRow(dialog.getFilledData());
 		}
 		dialog.dispose();
 	}
