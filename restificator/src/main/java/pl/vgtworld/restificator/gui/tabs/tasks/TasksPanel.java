@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.BorderLayout;
-import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
@@ -34,8 +33,7 @@ public class TasksPanel extends JPanel {
 	}
 
 	public List<Task> readData() {
-		//TODO Implementation.
-		return new ArrayList<>();
+		return tableModel.readData();
 	}
 
 	@PostConstruct
