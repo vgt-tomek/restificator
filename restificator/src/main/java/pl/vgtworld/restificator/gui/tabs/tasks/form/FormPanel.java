@@ -1,8 +1,10 @@
 package pl.vgtworld.restificator.gui.tabs.tasks.form;
 
+import pl.vgtworld.restificator.data.executionqueue.TaskType;
 import pl.vgtworld.utils.awt.Fill;
 import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -12,9 +14,9 @@ class FormPanel extends JPanel {
 
 	private static final int TEXT_FIELD_SIZE = 20;
 
-	private JTextField name = new JTextField(TEXT_FIELD_SIZE);
+	private JTextField name;
 
-	private JTextField type = new JTextField(TEXT_FIELD_SIZE);
+	private JComboBox<TaskType> type;
 
 	FormPanel() {
 		init();
@@ -28,15 +30,17 @@ class FormPanel extends JPanel {
 		name.setText(taskName);
 	}
 
-	String getTaskType() {
-		return type.getText();
+	TaskType getTaskType() {
+		return type.getItemAt(type.getSelectedIndex());
 	}
 
-	void setTaskType(String taskType) {
-		type.setText(taskType);
+	void setTaskType(TaskType taskType) {
+		type.setSelectedItem(taskType);
 	}
 
 	private void init() {
+		name = new JTextField(TEXT_FIELD_SIZE);
+		type = new JComboBox<>(TaskType.values());
 		GridBagConstraintsImproved gbc = new GridBagConstraintsImproved();
 		JLabel nameLabel = new JLabel("Name:");
 		JLabel typeLabel = new JLabel("Type:");
