@@ -27,7 +27,10 @@ public class TasksPanel extends JPanel {
 	}
 
 	public void fillWithData(List<Task> tasks) {
-		//TODO Implementation
+		tableModel.clearData();
+		for (Task task : tasks) {
+			tableModel.addRow(task);
+		}
 	}
 
 	public List<Task> readData() {
