@@ -54,6 +54,11 @@ public class TasksPanel extends JPanel {
 		tableModel.updateRow(index, row);
 	}
 
+	void deleteRow(int index) {
+		tableModel.deleteRow(index);
+		table.getSelectionModel().clearSelection();
+	}
+
 	@PostConstruct
 	private void init() {
 		tableModel = new TableModel();
@@ -61,7 +66,7 @@ public class TasksPanel extends JPanel {
 		JFrame mainWindow = (JFrame) SwingUtilities.getWindowAncestor(this);
 		NewTaskAction newTaskAction = new NewTaskAction(mainWindow, this);
 		EditTaskAction editTaskAction = new EditTaskAction(mainWindow, this);
-		DeleteTasksAction deleteTasksAction = new DeleteTasksAction();
+		DeleteTasksAction deleteTasksAction = new DeleteTasksAction(this);
 		buttonBar = new ButtonBar(newTaskAction, editTaskAction, deleteTasksAction);
 		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
 		table.getSelectionModel().addListSelectionListener(selectionListener);
