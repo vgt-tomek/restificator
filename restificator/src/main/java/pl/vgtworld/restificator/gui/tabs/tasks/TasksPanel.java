@@ -42,13 +42,25 @@ public class TasksPanel extends JPanel {
 		tableModel.addRow(row);
 	}
 
+	int[] getSelectedRows() {
+		return table.getSelectedRows();
+	}
+
+	Task getRow(int index) {
+		return tableModel.getRow(index);
+	}
+
+	void updateRow(int index, Task row) {
+		tableModel.updateRow(index, row);
+	}
+
 	@PostConstruct
 	private void init() {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
 		JFrame mainWindow = (JFrame) SwingUtilities.getWindowAncestor(this);
 		NewTaskAction newTaskAction = new NewTaskAction(mainWindow, this);
-		EditTaskAction editTaskAction = new EditTaskAction();
+		EditTaskAction editTaskAction = new EditTaskAction(mainWindow, this);
 		DeleteTasksAction deleteTasksAction = new DeleteTasksAction();
 		buttonBar = new ButtonBar(newTaskAction, editTaskAction, deleteTasksAction);
 

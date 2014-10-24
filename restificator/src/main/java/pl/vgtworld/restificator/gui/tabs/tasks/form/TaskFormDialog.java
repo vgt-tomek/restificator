@@ -21,6 +21,11 @@ public class TaskFormDialog extends JDialog {
 		init();
 	}
 
+	public TaskFormDialog(JFrame owner, Task data) {
+		this(owner);
+		fillWithData(data);
+	}
+
 	public boolean isSaved() {
 		return saved;
 	}
@@ -30,6 +35,11 @@ public class TaskFormDialog extends JDialog {
 		task.setName(form.getTaskName());
 		task.setType(form.getTaskType());
 		return task;
+	}
+
+	public void fillWithData(Task data) {
+		form.setTaskName(data.getName());
+		form.setTaskType(data.getType());
 	}
 
 	private void init() {
