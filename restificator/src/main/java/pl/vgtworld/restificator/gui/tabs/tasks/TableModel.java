@@ -47,4 +47,30 @@ class TableModel extends AbstractTableModel {
 		rows.clear();
 		fireTableRowsDeleted(1, rowCount);
 	}
+
+	void addRow(Task row) {
+		rows.add(row);
+		int newRowCount = rows.size();
+		fireTableRowsInserted(newRowCount, newRowCount);
+	}
+
+	void deleteRow(int index) {
+		rows.remove(index);
+		fireTableRowsDeleted(index + 1, index + 1);
+	}
+
+	Task getRow(int index) {
+		return rows.get(index);
+	}
+
+	void updateRow(int index, Task row) {
+		rows.remove(index);
+		rows.add(index, row);
+		fireTableRowsUpdated(index, index);
+	}
+
+	List<Task> readData() {
+		return rows;
+	}
+
 }
