@@ -63,6 +63,8 @@ public class TasksPanel extends JPanel {
 		EditTaskAction editTaskAction = new EditTaskAction(mainWindow, this);
 		DeleteTasksAction deleteTasksAction = new DeleteTasksAction();
 		buttonBar = new ButtonBar(newTaskAction, editTaskAction, deleteTasksAction);
+		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
+		table.getSelectionModel().addListSelectionListener(selectionListener);
 
 		setLayout(new BorderLayout());
 		add(buttonBar, BorderLayout.PAGE_START);
