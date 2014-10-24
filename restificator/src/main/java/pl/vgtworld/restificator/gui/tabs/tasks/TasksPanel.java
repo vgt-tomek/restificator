@@ -21,7 +21,9 @@ public class TasksPanel extends JPanel {
 	private ButtonBar buttonBar;
 
 	public void cleanData() {
-		//TODO Implementation.
+		tableModel.clearData();
+		buttonBar.setEnabledEditButton(false);
+		buttonBar.setEnabledDeleteButton(false);
 	}
 
 	public void fillWithData(List<Task> tasks) {

@@ -42,4 +42,9 @@ class TableModel extends AbstractTableModel {
 		throw new IllegalStateException();
 	}
 
+	void clearData() {
+		int rowCount = rows.size();
+		rows.clear();
+		fireTableRowsDeleted(1, rowCount);
+	}
 }
