@@ -4,9 +4,11 @@ import pl.vgtworld.restificator.data.executionqueue.Task;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.util.List;
 
@@ -40,7 +42,8 @@ public class TasksPanel extends JPanel {
 	private void init() {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
-		NewTaskAction newTaskAction = new NewTaskAction();
+		JFrame mainWindow = (JFrame) SwingUtilities.getWindowAncestor(this);
+		NewTaskAction newTaskAction = new NewTaskAction(mainWindow);
 		EditTaskAction editTaskAction = new EditTaskAction();
 		DeleteTasksAction deleteTasksAction = new DeleteTasksAction();
 		buttonBar = new ButtonBar(newTaskAction, editTaskAction, deleteTasksAction);
