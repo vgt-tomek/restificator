@@ -1,5 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.parameters;
 
+import pl.vgtworld.restificator.data.parameters.Parameter;
 import pl.vgtworld.restificator.data.parameters.Parameters;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +24,17 @@ public class ParametersPanel extends JPanel {
 	}
 
 	public void fillWithData(Parameters parameters) {
-		//TODO Implementaion.
+		tableModel.clearData();
+		if (parameters.getInteractiveParameters() != null) {
+			for (Parameter parameter : parameters.getInteractiveParameters()) {
+				tableModel.addRow(parameter);
+			}
+		}
+		if (parameters.getPredefinedParameters() != null) {
+			for (Parameter parameter : parameters.getPredefinedParameters()) {
+				tableModel.addRow(parameter);
+			}
+		}
 	}
 
 	public Parameters readData() {
