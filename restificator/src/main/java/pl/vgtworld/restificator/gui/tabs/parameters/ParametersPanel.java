@@ -2,6 +2,8 @@ package pl.vgtworld.restificator.gui.tabs.parameters;
 
 import pl.vgtworld.restificator.data.parameters.Parameter;
 import pl.vgtworld.restificator.data.parameters.Parameters;
+import pl.vgtworld.restificator.gui.tabs.parameters.datamodel.ParameterDataModel;
+import pl.vgtworld.restificator.gui.tabs.parameters.datamodel.ParameterGroup;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
@@ -27,12 +29,12 @@ public class ParametersPanel extends JPanel {
 		tableModel.clearData();
 		if (parameters.getInteractiveParameters() != null) {
 			for (Parameter parameter : parameters.getInteractiveParameters()) {
-				tableModel.addRow(parameter);
+				tableModel.addRow(new ParameterDataModel(parameter, ParameterGroup.INTERACTIVE));
 			}
 		}
 		if (parameters.getPredefinedParameters() != null) {
 			for (Parameter parameter : parameters.getPredefinedParameters()) {
-				tableModel.addRow(parameter);
+				tableModel.addRow(new ParameterDataModel(parameter, ParameterGroup.PREDEFINED));
 			}
 		}
 	}

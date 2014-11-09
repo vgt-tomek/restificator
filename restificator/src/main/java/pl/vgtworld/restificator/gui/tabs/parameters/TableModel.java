@@ -1,6 +1,6 @@
 package pl.vgtworld.restificator.gui.tabs.parameters;
 
-import pl.vgtworld.restificator.data.parameters.Parameter;
+import pl.vgtworld.restificator.gui.tabs.parameters.datamodel.ParameterDataModel;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
@@ -8,9 +8,9 @@ import java.util.List;
 
 class TableModel extends AbstractTableModel {
 
-	private String[] columnNames = {"Name", "Type"};
+	private String[] columnNames = {"Name", "Type", "Group"};
 
-	private List<Parameter> rows = new ArrayList<>();
+	private List<ParameterDataModel> rows = new ArrayList<>();
 
 	@Override
 	public int getRowCount() {
@@ -32,13 +32,14 @@ class TableModel extends AbstractTableModel {
 		if (columnIndex >= columnNames.length || rowIndex >= rows.size()) {
 			throw new IndexOutOfBoundsException();
 		}
-		Parameter row = rows.get(rowIndex);
+		ParameterDataModel row = rows.get(rowIndex);
 		switch (columnIndex) {
 			case 0:
-				return row.getName();
+				return row.getParameter().getName();
 			case 1:
-				return row.getClass().getName();
-
+				return row.getParameter().getClass().getName();
+			case 2:
+				return row.getGroup().toString().toLowerCase();
 		}
 		throw new IllegalArgumentException();
 	}
@@ -49,7 +50,7 @@ class TableModel extends AbstractTableModel {
 		fireTableRowsDeleted(1, rowCount);
 	}
 
-	void addRow(Parameter row) {
+	void addRow(ParameterDataModel row) {
 		rows.add(row);
 		int newRowCount = rows.size();
 		fireTableRowsInserted(newRowCount, newRowCount);
@@ -60,17 +61,17 @@ class TableModel extends AbstractTableModel {
 		fireTableRowsDeleted(index + 1, index + 1);
 	}
 
-	Parameter getRow(int index) {
+	ParameterDataModel getRow(int index) {
 		return rows.get(index);
 	}
 
-	void updateRow(int index, Parameter row) {
+	void updateRow(int index, ParameterDataModel row) {
 		rows.remove(index);
 		rows.add(index, row);
 		fireTableRowsUpdated(index, index);
 	}
 
-	List<Parameter> readRows() {
+	List<ParameterDataModel> readRows() {
 		return rows;
 	}
 }
