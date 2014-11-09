@@ -37,7 +37,8 @@ class TableModel extends AbstractTableModel {
 			case 0:
 				return row.getParameter().getName();
 			case 1:
-				return row.getParameter().getClass().getName();
+				String fullName = row.getParameter().getClass().getName();
+				return fullName.substring(fullName.lastIndexOf('.') + 1);
 			case 2:
 				return row.getGroup().toString().toLowerCase();
 		}
