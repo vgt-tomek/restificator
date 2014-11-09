@@ -11,6 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 @Singleton
 public class ParametersPanel extends JPanel {
@@ -42,8 +44,23 @@ public class ParametersPanel extends JPanel {
 	}
 
 	public Parameters readData() {
-		//TODO Implementaion.
-		return new Parameters();
+		List<Parameter> interactiveParameters = new ArrayList<>();
+		List<Parameter> predefinedParameters = new ArrayList<>();
+		List<ParameterDataModel> tableRows = tableModel.readRows();
+		for (ParameterDataModel parameter : tableRows) {
+			switch (parameter.getGroup()) {
+				case INTERACTIVE:
+					interactiveParameters.add(parameter.getParameter());
+					break;
+				case PREDEFINED:
+					predefinedParameters.add(parameter.getParameter());
+					break;
+			}
+		}
+		Parameters parameters = new Parameters();
+		parameters.setInteractiveParameters(interactiveParameters);
+		parameters.setPredefinedParameters(predefinedParameters);
+		return parameters;
 	}
 
 	@PostConstruct
