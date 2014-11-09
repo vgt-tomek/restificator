@@ -22,7 +22,9 @@ public class ParametersPanel extends JPanel {
 	private ButtonBar buttonBar;
 
 	public void cleanData() {
-		//TODO Implementaion.
+		tableModel.clearData();
+		buttonBar.setEnabledEditButton(false);
+		buttonBar.setEnabledDeleteButton(false);
 	}
 
 	public void fillWithData(Parameters parameters) {
