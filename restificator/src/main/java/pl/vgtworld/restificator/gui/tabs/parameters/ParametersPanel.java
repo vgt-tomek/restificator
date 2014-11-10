@@ -74,7 +74,7 @@ public class ParametersPanel extends JPanel {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
 		JFrame mainWindow = (JFrame) SwingUtilities.getWindowAncestor(this);
-		NewDatetimeAction newDatetimeAction = new NewDatetimeAction();
+		NewDatetimeAction newDatetimeAction = new NewDatetimeAction(mainWindow, this);
 		NewTextAction newTextAction = new NewTextAction(mainWindow, this);
 		NewCounterAction newCounterAction = new NewCounterAction();
 		EditParameterAction editParameterAction = new EditParameterAction();
