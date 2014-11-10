@@ -7,9 +7,11 @@ import pl.vgtworld.restificator.gui.tabs.parameters.datamodel.ParameterGroup;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,12 +65,17 @@ public class ParametersPanel extends JPanel {
 		return parameters;
 	}
 
+	public void addRow(ParameterDataModel row) {
+		tableModel.addRow(row);
+	}
+
 	@PostConstruct
 	private void init() {
 		tableModel = new TableModel();
 		table = new JTable(tableModel);
+		JFrame mainWindow = (JFrame) SwingUtilities.getWindowAncestor(this);
 		NewDatetimeAction newDatetimeAction = new NewDatetimeAction();
-		NewTextAction newTextAction = new NewTextAction();
+		NewTextAction newTextAction = new NewTextAction(mainWindow, this);
 		NewCounterAction newCounterAction = new NewCounterAction();
 		EditParameterAction editParameterAction = new EditParameterAction();
 		DeleteParametersAction deleteParametersAction = new DeleteParametersAction();
