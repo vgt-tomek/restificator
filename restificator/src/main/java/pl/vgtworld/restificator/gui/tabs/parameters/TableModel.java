@@ -48,7 +48,7 @@ class TableModel extends AbstractTableModel {
 	void clearData() {
 		int rowCount = rows.size();
 		rows.clear();
-		fireTableRowsDeleted(1, rowCount);
+		fireTableRowsDeleted(0, rowCount);
 	}
 
 	void addRow(ParameterDataModel row) {
