@@ -73,6 +73,11 @@ public class ParametersPanel extends JPanel {
 		return table.getSelectedRows();
 	}
 
+	public void deleteRow(int index) {
+		tableModel.deleteRow(index);
+		table.getSelectionModel().clearSelection();
+	}
+
 	@PostConstruct
 	private void init() {
 		tableModel = new TableModel();
@@ -82,7 +87,7 @@ public class ParametersPanel extends JPanel {
 		NewTextAction newTextAction = new NewTextAction(mainWindow, this);
 		NewCounterAction newCounterAction = new NewCounterAction(mainWindow, this);
 		EditParameterAction editParameterAction = new EditParameterAction();
-		DeleteParametersAction deleteParametersAction = new DeleteParametersAction();
+		DeleteParametersAction deleteParametersAction = new DeleteParametersAction(this);
 		buttonBar = new ButtonBar(newDatetimeAction, newTextAction, newCounterAction, editParameterAction, deleteParametersAction);
 		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
 		table.getSelectionModel().addListSelectionListener(selectionListener);

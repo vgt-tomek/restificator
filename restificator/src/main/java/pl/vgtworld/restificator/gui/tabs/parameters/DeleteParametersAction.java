@@ -5,12 +5,18 @@ import java.awt.event.ActionEvent;
 
 class DeleteParametersAction extends AbstractAction {
 
-	DeleteParametersAction() {
+	private ParametersPanel parametersPanel;
+
+	DeleteParametersAction(ParametersPanel parametersPanel) {
+		this.parametersPanel = parametersPanel;
 		putValue(NAME, "Delete");
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//TODO Implementation.
+		int[] selectedRows = parametersPanel.getSelectedRows();
+		for (int i = selectedRows.length - 1; i >= 0; --i) {
+			parametersPanel.deleteRow(selectedRows[i]);
+		}
 	}
 }
