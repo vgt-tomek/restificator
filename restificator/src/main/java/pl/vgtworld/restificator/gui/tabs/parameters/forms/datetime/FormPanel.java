@@ -51,7 +51,8 @@ class FormPanel extends JPanel {
 	}
 
 	void setParameterDate(Date parameterDate) {
-		date.setText("" + parameterDate);
+		SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_FORMAT);
+		date.setText("" + dateFormatter.format(parameterDate));
 		dateConverted = parameterDate;
 	}
 
