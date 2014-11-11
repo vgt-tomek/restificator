@@ -69,6 +69,10 @@ public class ParametersPanel extends JPanel {
 		tableModel.addRow(row);
 	}
 
+	public int[] getSelectedRows() {
+		return table.getSelectedRows();
+	}
+
 	@PostConstruct
 	private void init() {
 		tableModel = new TableModel();
@@ -80,6 +84,8 @@ public class ParametersPanel extends JPanel {
 		EditParameterAction editParameterAction = new EditParameterAction();
 		DeleteParametersAction deleteParametersAction = new DeleteParametersAction();
 		buttonBar = new ButtonBar(newDatetimeAction, newTextAction, newCounterAction, editParameterAction, deleteParametersAction);
+		SelectionListener selectionListener = new SelectionListener(this, buttonBar);
+		table.getSelectionModel().addListSelectionListener(selectionListener);
 
 		setLayout(new BorderLayout());
 		add(buttonBar, BorderLayout.PAGE_START);
