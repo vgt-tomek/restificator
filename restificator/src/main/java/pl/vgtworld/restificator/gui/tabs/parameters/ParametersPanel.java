@@ -76,7 +76,7 @@ public class ParametersPanel extends JPanel {
 		JFrame mainWindow = (JFrame) SwingUtilities.getWindowAncestor(this);
 		NewDatetimeAction newDatetimeAction = new NewDatetimeAction(mainWindow, this);
 		NewTextAction newTextAction = new NewTextAction(mainWindow, this);
-		NewCounterAction newCounterAction = new NewCounterAction();
+		NewCounterAction newCounterAction = new NewCounterAction(mainWindow, this);
 		EditParameterAction editParameterAction = new EditParameterAction();
 		DeleteParametersAction deleteParametersAction = new DeleteParametersAction();
 		buttonBar = new ButtonBar(newDatetimeAction, newTextAction, newCounterAction, editParameterAction, deleteParametersAction);
