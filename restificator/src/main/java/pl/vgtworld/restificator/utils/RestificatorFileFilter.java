@@ -10,7 +10,7 @@ public class RestificatorFileFilter extends FileFilter {
 	@Override
 	public boolean accept(File f) {
 		String path = f.getAbsolutePath();
-		return path.endsWith(ACCEPTED_EXTENSION);
+		return f.isDirectory() || path.endsWith(ACCEPTED_EXTENSION);
 	}
 
 	@Override
