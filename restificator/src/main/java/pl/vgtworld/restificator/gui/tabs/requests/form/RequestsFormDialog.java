@@ -1,15 +1,14 @@
 package pl.vgtworld.restificator.gui.tabs.requests.form;
 
 import pl.vgtworld.restificator.gui.tabs.requests.RequestDataModel;
-import pl.vgtworld.utils.awt.Fill;
-import pl.vgtworld.utils.awt.GridBagConstraintsImproved;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.GridBagLayout;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 public class RequestsFormDialog extends JDialog {
@@ -52,22 +51,22 @@ public class RequestsFormDialog extends JDialog {
 	}
 
 	private void init() {
-		GridBagConstraintsImproved gbc = new GridBagConstraintsImproved();
 		JButton saveButton = new JButton("Save");
 		JButton cancelButton = new JButton("Cancel");
 		JPanel buttonPanel = new JPanel();
+		JPanel formPanel = new JPanel();
 
-		setLayout(new GridBagLayout());
+		setLayout(new BorderLayout());
 
 		buttonPanel.add(saveButton);
 		buttonPanel.add(cancelButton);
 
-		gbc.setGrid(0, 0).setGridSize(1, 1).setWeight(100, 100).setInsets(0).setFill(Fill.BOTH);
-		add(leftPanel, gbc);
-		gbc.setGrid(1, 0).setGridSize(1, 1).setWeight(100, 100).setInsets(0).setFill(Fill.BOTH);
-		add(rightPanel, gbc);
-		gbc.setGrid(0, 1).setGridSize(2, 1).setWeight(100, 0).setInsets(5).setFill(Fill.BOTH);
-		add(buttonPanel, gbc);
+		formPanel.setLayout(new GridLayout(1, 2));
+		formPanel.add(leftPanel);
+		formPanel.add(rightPanel);
+
+		add(formPanel, BorderLayout.CENTER);
+		add(buttonPanel, BorderLayout.PAGE_END);
 
 		cancelButton.addActionListener(new AbstractAction() {
 			@Override
